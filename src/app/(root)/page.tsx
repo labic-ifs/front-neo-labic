@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 export default function Home() {
   return (
-    <main className="min-h-screen mt-16">
+    <main className="min-h-screen">
       <Head>
           <title>Início - Labic</title>
       </Head>
@@ -13,7 +13,7 @@ export default function Home() {
             <h1 className='text-white text-3xl font-bold'>Conheça os Trabalhos do Laboratório Mais Criativo de Sergipe</h1>
             <p className='text-white'>Fazendo história no mundo da tecnologia e robótica!</p>
           </div>
-          <button className='text-white font-bold max-w-[14rem] rounded-md py-3 px-8 bg-blue-500 active:bg-blue-800 hover:bg-blue-700 ease-in-out duration-300'>Quero Conhecer!</button>
+          <button className='text-white font-bold max-w-[14rem] rounded-md py-3 px-8 bg-users_accent active:bg-users_accent_active hover:bg-users_accent_hover ease-in-out duration-300'>Quero Conhecer!</button>
         </div>
         <Image className='sm:w-5/12' priority src="/hero_image.png" width={1080} height={861} alt='Hero Image'></Image>
       </div>

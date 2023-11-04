@@ -20,7 +20,7 @@ type SignInData = {
 type AuthContextType = {
     isAuthenticated: boolean;
     userData: UserType | null;
-    signIn: (data: SignInData) => Promise<void>;
+    signIn: (data: SignInData) => Promise<string>;
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -52,7 +52,7 @@ export function AuthProvider({ children, }: {children: React.ReactNode}){
     })
 
     async function signIn({ email, password }: SignInData) {
-        const { token, user } = await fetch(`${host}auth/authenticateUser/`, {
+        const { token, user, status } = await fetch(`${host}auth/authenticateUser/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -60,13 +60,19 @@ export function AuthProvider({ children, }: {children: React.ReactNode}){
             body: JSON.stringify({ 'email': email, 'password': password })
         }).then((res) => { return res.json() })
 
-        setCookie(undefined, 'authToken', token.token, {
-            maxAge: 60 * 60 * 72 // 3 days
-        })
+        if(token){
+            setCookie(undefined, 'authToken', token.token, {
+                maxAge: 60 * 60 * 72 // 3 days
+            })
 
-        setUserData(userData)
+            setUserData(userData)
 
-        router.push('/admin/myProfile')
+            router.push('/admin/myProfile')
+            
+            return status
+        } else {
+            return status
+        }
     }
 
     return (
