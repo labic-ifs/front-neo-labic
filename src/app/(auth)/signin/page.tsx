@@ -16,56 +16,28 @@ type FormData = {
 }
 
 type ErrorsTypes = {
-    email?: string,
-    password?: string,
     credentials?: string,
 }
 
 export default function SignInPage(){
-    const [ errors, setErrors ] = useState<ErrorsTypes>({})
-    const [ isFormValid, setIsFormValid ] = useState(false)
-    const [ watchChanges, setWatchChanges ] = useState({})
-    const { register, handleSubmit, getValues, watch } = useForm<FormData>()
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
+    const [ loginErrors, setLoginErrors] = useState<ErrorsTypes>({})
     const { signIn } = useContext(AuthContext)
-
-    useEffect(() => {
-        validateForm()
-
-        const subscription = watch((data) => {setWatchChanges(data)})
-        return () => subscription.unsubscribe()
-    }, [watchChanges]); 
-
-    const validateForm = () => {
-        const data: FormData = getValues()
-        let errors: ErrorsTypes = {}
-
-        if(!data.email) {
-            errors.email = 'Insira um e-mail!'
-        }
-
-        if(!data.password) {
-            errors.password = 'Insira uma senha!'
-        } else if (data.password.length <= 8) {
-            errors.password = 'Senha muito curta!'
-        }
-
-        setErrors(errors)
-        setIsFormValid(Object.keys(errors).length === 0)
-    }
 
     const handleSignIn = handleSubmit(async (data) => {
         let errors: ErrorsTypes = {}
 
-        if(isFormValid) {
-            const signInStatus = await signIn(data)
+        const signInStatus = await signIn(data)
 
-            if(signInStatus === 'Invalid Credentials') {
-                errors.credentials = 'E-mail ou senha inválidos!'
-            }
-
-            setErrors(errors)
+        if(signInStatus === 'Invalid Credentials') {
+            errors.credentials = 'E-mail ou senha inválidos!'
         }
+
+        setLoginErrors(errors)
     })
+
+    const emailValidator = {required: { value: true, message: 'Insira um e-mail.' },pattern: { value: /.+@.+/, message: 'E-mail inválido.' },}
+    const passwordValidator = {required: { value: true, message: 'Insira uma senha.'}, minLength: { value: 8, message: 'Senha muito curta.'}}
 
     return(
         <main className="flex flex-col lg:flex-row text-white">
@@ -79,12 +51,12 @@ export default function SignInPage(){
                 <form className="flex flex-col lg:w-8/12 w-10/12" onSubmit={handleSignIn}>
                     <h1 className="text-4xl font-bold py-4">Entrar</h1>
                     <span>Email</span>
-                    <TextInput name="email" formRegister={register} icon={<HiOutlineMail />} placeholder="example@example.com" type="email" />
-                    { errors.email ? <FieldError text={errors.email}></FieldError> : <></>}
+                    <TextInput name="email" formRegister={register} formValidation={emailValidator} icon={<HiOutlineMail />} placeholder="example@example.com" type="email" />
+                    { errors.email ? <FieldError text={errors.email.message!}></FieldError> : <></>}
                     <span>Senha</span>
-                    <TextInput name="password" formRegister={register} icon={<BiLockAlt />}  placeholder="strongPasswordExample" type="password" />
-                    { errors.password ? <FieldError text={errors.password}></FieldError> : <></>}
-                    { errors.credentials ? <FieldError text={errors.credentials}></FieldError> : <></>}
+                    <TextInput name="password" formRegister={register} formValidation={passwordValidator} icon={<BiLockAlt />}  placeholder="strongPasswordExample" type="password" />
+                    { errors.password ? <FieldError text={errors.password.message!}></FieldError> : <></>}
+                    { loginErrors.credentials ? <FieldError text={loginErrors.credentials}></FieldError> : <></>}
                     <button className='text-white mb-4 md:mb-0 mt-2 font-bold rounded-md py-3 px-8 bg-admin_accent active:bg-admin_accent_active hover:bg-admin_accent_hover ease-in-out duration-300'>Entrar</button>
                 </form>
             </div>
