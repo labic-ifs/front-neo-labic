@@ -1,31 +1,28 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { AuthContext } from "@/contexts/AuthContext"
-import { api } from "@/services/api"
-import { GetServerSideProps } from "next"
-import { useRouter } from "next/navigation"
 import { parseCookies } from "nookies"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
-const getToken = async () => {
+const GetToken = () => {
     const { 'authToken': token } = parseCookies()
 
-    if(!token){
-        useRouter().push('/signin')
-    }
+    const router = useRouter()
 
-    return {}
+    useEffect(() => {
+        if(!token) {
+            router.push('/signin')
+        }
+    })
 }
 
 export default function MyProfile() {
+    GetToken()
+    
     const { userData, isAuthenticated } = useContext(AuthContext)
-    getToken()
-
-    async function testFunc() {
-        console.log((await api.get('auth/recoverUser/')).data)
-    }
 
     return (
-        <button onClick={testFunc}>aaa</button>
+        <button>Test button</button>
     )
 }
