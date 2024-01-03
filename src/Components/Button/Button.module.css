@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 1rem 3rem;
+	cursor: pointer;
+	border: none;
+	border-radius: 0.5rem;
+	transition: background-color 0.25s;
+}
+
+.btnColor {
+	background-color: var(--primary-color);
+}
+
+.btnColor:hover {
+	background-color: var(--secondary-color);
+}
+
+.btnColor:active {
+	background-color: var(--terciary-color);
+}
+
+.btnColor:focus {
+	border: var(--soft-color) 2px solid;
+	padding: calc(1rem - 2px) calc(3rem - 2px);
+	outline: none;
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+.text {
+	color: #fff;
+	font-weight: 500;
+}
