@@ -1,0 +1,7 @@
+.container {
+	color: var(--error-text);
+}
+
+.fieldError {
+	font-size: 0.75rem;
+}

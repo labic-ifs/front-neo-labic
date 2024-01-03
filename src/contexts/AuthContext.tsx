@@ -51,8 +51,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	})
 
 	async function signIn({ email, password }: SignInData) {
+		console.log(email, password)
 		const { token, user, success, error } = await fetch(
-			`${process.env.HOST}auth/authenticateUser/`,
+			`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/authenticateUser/`,
 			{
 				method: "POST",
 				headers: { "Content-Type": "application/json" },

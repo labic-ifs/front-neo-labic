@@ -6,6 +6,7 @@
 	--primary-bg: #151216;
 	--accent-bg: #292329;
 	--soft-bg: #b2a1b2;
+	--error-text: #ff5959;
 }
 
 * {
@@ -29,4 +30,12 @@ body {
 ::-ms-input-placeholder {
 	/* Edge 12 -18 */
 	color: var(--soft-color);
+}
+
+.hidden {
+	display: none;
+}
+
+.visible {
+	display: block;
 }
