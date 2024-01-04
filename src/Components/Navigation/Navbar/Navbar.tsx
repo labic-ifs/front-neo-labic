@@ -36,44 +36,51 @@ export default function Navbar() {
 	]
 
 	return (
-		<nav
-			className={styles.container}
-			style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}
-		>
-			<section className={styles.left}>
-				<Image src="/logo.png" alt="logo" width={48} height={48} />
-				<div className={styles.navToggle}>
-					<Hamburger
-						size={32}
-						rounded
-						onToggle={() => setNavState((prevState) => !prevState)}
-					></Hamburger>
-				</div>
-			</section>
-			<section className={styles.center}>
-				<Links links={links} />
-			</section>
-			<section className={styles.right}>
-				{userData?.profile_image ? (
-					<Link href="/admin/my-profile">
-						<Image
-							className={styles.userProfileImage}
-							src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
-							alt="profile image"
-							width={48}
-							height={48}
-						/>
-					</Link>
-				) : (
-					<Link href="/sign-in">
-						<IconContext.Provider
-							value={{ className: styles.signInIcon, color: "#fff", size: "48px" }}
-						>
-							<PiUserCirclePlusLight />
-						</IconContext.Provider>
-					</Link>
-				)}
-			</section>
-		</nav>
+		<>
+			<div className={styles.navDummy}></div>
+			<nav
+				className={styles.container}
+				style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}
+			>
+				<section className={styles.left}>
+					<Image src="/logo.png" alt="logo" width={48} height={48} />
+					<div className={styles.navToggle}>
+						<Hamburger
+							size={32}
+							rounded
+							onToggle={() => setNavState((prevState) => !prevState)}
+						></Hamburger>
+					</div>
+				</section>
+				<section className={styles.center}>
+					<Links links={links} />
+				</section>
+				<section className={styles.right}>
+					{userData?.profile_image ? (
+						<Link href="/admin/my-profile">
+							<Image
+								className={styles.userProfileImage}
+								src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
+								alt="profile image"
+								width={48}
+								height={48}
+							/>
+						</Link>
+					) : (
+						<Link href="/sign-in">
+							<IconContext.Provider
+								value={{
+									className: styles.signInIcon,
+									color: "#fff",
+									size: "48px",
+								}}
+							>
+								<PiUserCirclePlusLight />
+							</IconContext.Provider>
+						</Link>
+					)}
+				</section>
+			</nav>
+		</>
 	)
 }

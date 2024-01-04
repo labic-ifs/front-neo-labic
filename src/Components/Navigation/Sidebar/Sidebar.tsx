@@ -12,6 +12,7 @@ export default function Sidebar() {
 
 	return (
 		<>
+			<div className={styles.navDummy}></div>
 			<nav
 				className={styles.container}
 				style={navState ? { maxWidth: "192px" } : { maxWidth: "70px" }}
@@ -35,6 +36,7 @@ export default function Sidebar() {
 					<SidebarLinks navState={navState} />
 				</section>
 			</nav>
+			<div className={styles.mobileNavDummy}></div>
 			<nav
 				className={styles.mobileContainer}
 				style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}

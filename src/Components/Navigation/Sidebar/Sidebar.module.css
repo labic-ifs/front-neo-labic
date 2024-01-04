@@ -1,3 +1,9 @@
+.navDummy {
+	display: block;
+	width: 70px;
+	height: 100vh;
+}
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -11,6 +17,9 @@
 	border-style: solid;
 	border-image: var(--border-gradient);
 	transition: 0.25s ease-in-out;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
 .logo {
@@ -26,6 +35,7 @@
 }
 
 .navTitle {
+	font-size: 12px;
 	white-space: nowrap;
 	transition: 0.25s cubic-bezier(0.95, 0.05, 0.795, 0.035);
 }
@@ -37,6 +47,12 @@
 }
 
 /* Mobile */
+
+.mobileNavDummy {
+	display: none;
+	width: 100%;
+	height: 67px;
+}
 
 .mobileContainer {
 	display: none;
@@ -68,8 +84,16 @@
 }
 
 @media (max-width: 768px) {
+	.navDummy {
+		display: none;
+	}
+
 	.container {
 		display: none;
+	}
+
+	.mobileNavDummy {
+		display: block;
 	}
 
 	.mobileContainer {
