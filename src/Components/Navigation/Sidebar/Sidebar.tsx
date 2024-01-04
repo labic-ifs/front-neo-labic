@@ -6,31 +6,35 @@ import SidebarLinks from "./SidebarLinks/SidebarLinks"
 
 import { Squash as Hamburger } from "hamburger-react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function Sidebar() {
 	const [navState, setNavState] = useState(false)
+
+	const router = useRouter()
 
 	return (
 		<>
 			<div className={styles.navDummy}></div>
 			<nav
 				className={styles.container}
-				style={navState ? { maxWidth: "192px" } : { maxWidth: "70px" }}
+				style={navState ? { maxWidth: "216px" } : { maxWidth: "70px" }}
 				onMouseEnter={() => setNavState((prevState) => !prevState)}
 				onMouseLeave={() => setNavState((prevState) => !prevState)}
 			>
-				<section className={styles.logoSection}>
-					<div className={styles.logo}>
-						<Image src="/logo.png" alt="logo" fill />
-					</div>
-					{navState && (
-						<h5
-							className={styles.navTitle}
-							style={navState ? { opacity: "1" } : { opacity: "0" }}
-						>
-							Plataforma Labic
-						</h5>
-					)}
+				<section
+					className={styles.logoSection}
+					onClick={() => {
+						router.push("/")
+					}}
+				>
+					<Image src="/logo.png" alt="logo" width={48} height={48} />
+					<h5
+						className={styles.navTitle}
+						style={navState ? { opacity: "1" } : { opacity: "0" }}
+					>
+						Plataforma Labic
+					</h5>
 				</section>
 				<section className={styles.myAccountSection}>
 					<SidebarLinks navState={navState} />

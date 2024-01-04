@@ -37,12 +37,12 @@ export default function SidebarLinks({ navState }: SidebarLinksProps) {
 							extraClassName={`${pathname === item.path && styles.active}`}
 						>
 							<MinimalButton.Icon icon={item.icon} extraStyles={styles.itemIcon} />
-							<span
+							<div
 								className={styles.textSpan}
 								style={navState ? { opacity: "1" } : { opacity: "0" }}
 							>
-								{navState && <MinimalButton.Text text={item.name} />}
-							</span>
+								<MinimalButton.Text text={item.name} />
+							</div>
 						</MinimalButton.Root>
 					</Link>
 				)
