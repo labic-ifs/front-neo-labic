@@ -1,3 +1,5 @@
+"use client"
+
 import { ElementType } from "react"
 import styles from "./MinimalButton.module.css"
 import { IconContext } from "react-icons"

@@ -31,6 +31,10 @@
 	justify-content: space-between;
 }
 
+.logoImage {
+	cursor: pointer;
+}
+
 .center {
 	display: flex;
 	gap: 0.5rem;

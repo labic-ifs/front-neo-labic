@@ -46,7 +46,16 @@ export default function Sidebar() {
 				style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}
 			>
 				<section className={styles.top}>
-					<Image src="/logo.png" alt="logo" width={48} height={48} />
+					<Image
+						className={styles.mobileLogo}
+						src="/logo.png"
+						alt="logo"
+						width={48}
+						height={48}
+						onClick={() => {
+							router.push("/")
+						}}
+					/>
 					<Hamburger
 						size={32}
 						rounded

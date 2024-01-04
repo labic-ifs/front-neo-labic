@@ -78,6 +78,10 @@
 	margin-bottom: 8px;
 }
 
+.mobileLogo {
+	cursor: pointer;
+}
+
 .bottom {
 	display: flex;
 	gap: 0.5rem;

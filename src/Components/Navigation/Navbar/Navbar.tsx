@@ -10,11 +10,14 @@ import { IconContext } from "react-icons"
 import { Squash as Hamburger } from "hamburger-react"
 import { useContext, useState } from "react"
 import { AuthContext } from "@/contexts/AuthContext"
+import { useRouter } from "next/navigation"
 
 export default function Navbar() {
 	const [navState, setNavState] = useState<boolean>(false)
 
 	const { userData } = useContext(AuthContext)
+
+	const router = useRouter()
 
 	const links = [
 		{
@@ -43,7 +46,16 @@ export default function Navbar() {
 				style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}
 			>
 				<section className={styles.left}>
-					<Image src="/logo.png" alt="logo" width={48} height={48} />
+					<Image
+						className={styles.logoImage}
+						src="/logo.png"
+						alt="logo"
+						width={48}
+						height={48}
+						onClick={() => {
+							router.push("/")
+						}}
+					/>
 					<div className={styles.navToggle}>
 						<Hamburger
 							size={32}
