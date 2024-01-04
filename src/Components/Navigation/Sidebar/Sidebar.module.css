@@ -35,3 +35,45 @@
 	flex-direction: column;
 	gap: 8px;
 }
+
+/* Mobile */
+
+.mobileContainer {
+	display: none;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 64px;
+	width: 100%;
+	background: var(--primary-gradient);
+	border-width: 3px;
+	border-style: solid;
+	border-image: var(--border-gradient) 1;
+	overflow: hidden;
+	transition: all 0.25s ease-in-out;
+}
+
+.top {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.bottom {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	flex-direction: column;
+}
+
+@media (max-width: 768px) {
+	.container {
+		display: none;
+	}
+
+	.mobileContainer {
+		display: flex;
+		flex-direction: column;
+	}
+}

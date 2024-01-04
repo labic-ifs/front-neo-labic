@@ -41,9 +41,7 @@ export default function Navbar() {
 			style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}
 		>
 			<section className={styles.left}>
-				<div className={styles.logoContainer}>
-					<Image src="/logo.png" alt="logo" fill />
-				</div>
+				<Image src="/logo.png" alt="logo" width={48} height={48} />
 				<div className={styles.navToggle}>
 					<Hamburger
 						size={32}
