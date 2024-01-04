@@ -38,12 +38,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 			const { labicToken: token } = parseCookies()
 
 			if (token && !userData) {
-				const user = await fetch(`${process.env.HOST}auth/recoverUser/`, {
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-					},
-				}).then((res) => res.json())
+				const user = await fetch(
+					`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/recoverUser/`,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				).then((res) => res.json())
 
 				setUserData(user)
 			}
@@ -51,7 +54,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	})
 
 	async function signIn({ email, password }: SignInData) {
-		console.log(email, password)
 		const { token, user, success, error } = await fetch(
 			`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/authenticateUser/`,
 			{

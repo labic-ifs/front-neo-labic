@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	background-color: transparent;
+	padding: 0.75rem;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+.container:hover {
+	text-decoration: underline;
+}
+
+.text {
+	color: #fff;
+	text-decoration: inherit;
+	font-weight: 600;
+	transition: 0.25s ease;
+}

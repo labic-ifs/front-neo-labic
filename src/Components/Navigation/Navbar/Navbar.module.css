@@ -1,0 +1,61 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 4rem;
+	width: 100%;
+	background: var(--primary-gradient);
+	border-width: 3px;
+	border-style: solid;
+	border-image: var(--border-gradient) 1;
+	overflow: hidden;
+	transition: all 0.25s ease-in-out;
+}
+
+.navToggle {
+	display: none;
+}
+
+.left {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.logoContainer {
+	position: relative;
+	width: 3rem;
+	height: 3rem;
+}
+
+.center {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.signInIcon {
+	cursor: pointer;
+}
+
+@media (max-width: 768px) {
+	.container {
+		flex-direction: column;
+	}
+
+	.navToggle {
+		display: block;
+	}
+
+	.center {
+		flex-direction: column;
+	}
+
+	.left {
+		width: 100%;
+	}
+
+	.right {
+		margin-top: 0.75rem;
+	}
+}

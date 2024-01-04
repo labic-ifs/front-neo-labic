@@ -4,12 +4,13 @@ import Image from "next/image"
 import styles from "./SignIn.module.css"
 
 import Error from "@/Components/Forms/Error/Error"
-import { Button } from "@/Components/Button"
+import { Button } from "@/Components/Buttons/Button"
 import { Input } from "@/Components/Forms/Input"
 
+import { MdOutlineEmail } from "react-icons/md"
+import { RiLockPasswordLine } from "react-icons/ri"
 import React, { useContext, useState } from "react"
 import { useFormState } from "react-dom"
-import { PiUserCirclePlusLight } from "react-icons/pi"
 import { object, string } from "yup"
 import { AuthContext } from "@/contexts/AuthContext"
 
@@ -20,7 +21,9 @@ type formTypes = {
 
 let formSchema = object({
 	email: string().email("Insira um e-mail válido!").required("O e-mail é obrigatório!"),
-	password: string().required("A senha é obrigatória!"),
+	password: string()
+		.min(8, "A senha deve ter no mínimo 8 caracteres.")
+		.required("A senha é obrigatória!"),
 })
 
 export default function SignIn() {
@@ -34,7 +37,7 @@ export default function SignIn() {
 
 	async function handleSubmit() {
 		try {
-			const validate = await formSchema.validate(formData, { abortEarly: false })
+			await formSchema.validate(formData, { abortEarly: false })
 
 			const trySignIn = await signIn(formData)
 
@@ -66,7 +69,7 @@ export default function SignIn() {
 					<section className={styles.inputSection}>
 						<p className={styles.inputLabel}>E-mail</p>
 						<Input.Root>
-							<Input.Icon icon={PiUserCirclePlusLight} />
+							<Input.Icon icon={MdOutlineEmail} />
 							<Input.Tag
 								name="email"
 								type="email"
@@ -84,7 +87,7 @@ export default function SignIn() {
 					<section className={styles.inputSection}>
 						<p className={styles.inputLabel}>Senha</p>
 						<Input.Root>
-							<Input.Icon icon={PiUserCirclePlusLight} />
+							<Input.Icon icon={RiLockPasswordLine} />
 							<Input.Tag
 								name="password"
 								type="password"
@@ -94,6 +97,9 @@ export default function SignIn() {
 						</Input.Root>
 						{state?.includes("A senha é obrigatória!") && (
 							<Error text="A senha é obrigatória!" fieldError />
+						)}
+						{state?.includes("A senha deve ter no mínimo 8 caracteres.") && (
+							<Error text="A senha deve ter no mínimo 8 caracteres." fieldError />
 						)}
 					</section>
 					{state?.includes("Invalid Credentials") && (

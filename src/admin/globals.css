@@ -1,0 +1,41 @@
+:root {
+	--primary-color: #ca59ff;
+	--secondary-color: #9821d0;
+	--terciary-color: #6b009d;
+	--soft-color: #ecc2ff;
+	--primary-bg: #151216;
+	--accent-bg: #292329;
+	--soft-bg: #b2a1b2;
+	--error-text: #ff5959;
+}
+
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #fff;
+	background-color: var(--primary-bg);
+}
+
+::placeholder {
+	color: var(--soft-color);
+	opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+	/* Edge 12 -18 */
+	color: var(--soft-color);
+}
+
+.hidden {
+	display: none;
+}
+
+.visible {
+	display: block;
+}
