@@ -7,14 +7,14 @@ import Link from "next/link"
 
 import { PiUserCirclePlusLight } from "react-icons/pi"
 import { IconContext } from "react-icons"
-import { useRouter } from "next/navigation"
 import { Squash as Hamburger } from "hamburger-react"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AuthContext } from "@/contexts/AuthContext"
 
 export default function Navbar() {
-	const router = useRouter()
-
 	const [navState, setNavState] = useState<boolean>(false)
+
+	const { userData } = useContext(AuthContext)
 
 	const links = [
 		{
@@ -56,13 +56,25 @@ export default function Navbar() {
 				<Links links={links} />
 			</section>
 			<section className={styles.right}>
-				<Link href="/sign-in">
-					<IconContext.Provider
-						value={{ className: styles.signInIcon, color: "#fff", size: "48px" }}
-					>
-						<PiUserCirclePlusLight />
-					</IconContext.Provider>
-				</Link>
+				{userData?.profile_image ? (
+					<Link href="/admin/my-profile">
+						<Image
+							className={styles.userProfileImage}
+							src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
+							alt="profile image"
+							width={48}
+							height={48}
+						/>
+					</Link>
+				) : (
+					<Link href="/sign-in">
+						<IconContext.Provider
+							value={{ className: styles.signInIcon, color: "#fff", size: "48px" }}
+						>
+							<PiUserCirclePlusLight />
+						</IconContext.Provider>
+					</Link>
+				)}
 			</section>
 		</nav>
 	)

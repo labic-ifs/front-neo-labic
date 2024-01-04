@@ -15,19 +15,19 @@ import { object, string } from "yup"
 import { AuthContext } from "@/contexts/AuthContext"
 
 type formTypes = {
-	email: string
-	password: string
+	key?: string
+	password?: string
 }
 
 let formSchema = object({
-	email: string().email("Insira um e-mail válido!").required("O e-mail é obrigatório!"),
+	key: string().required("O e-mail ou usuário é obrigatório!"),
 	password: string()
 		.min(8, "A senha deve ter no mínimo 8 caracteres.")
 		.required("A senha é obrigatória!"),
 })
 
 export default function SignIn() {
-	const [formData, setFormData] = useState<formTypes>({ email: "", password: "" })
+	const [formData, setFormData] = useState<formTypes>({})
 	const [state, formAction] = useFormState(handleSubmit, undefined)
 	const { signIn } = useContext(AuthContext)
 
@@ -67,21 +67,18 @@ export default function SignIn() {
 				<form className={styles.formTag} action={formAction} noValidate>
 					<h1 className={styles.title}>Entre na sua conta Labic!</h1>
 					<section className={styles.inputSection}>
-						<p className={styles.inputLabel}>E-mail</p>
+						<p className={styles.inputLabel}>E-mail ou Username</p>
 						<Input.Root>
 							<Input.Icon icon={MdOutlineEmail} />
 							<Input.Tag
-								name="email"
-								type="email"
-								placeholder="labic@gmail.com"
+								name="key"
+								type="text"
+								placeholder="labic@gmail.com ou labic.ifs"
 								getValue={getValue}
 							/>
 						</Input.Root>
-						{state?.includes("O e-mail é obrigatório!") && (
-							<Error text="O e-mail é obrigatório!" fieldError />
-						)}
-						{state?.includes("Insira um e-mail válido!") && (
-							<Error text="Insira um e-mail válido!" fieldError />
+						{state?.includes("O e-mail ou usuário é obrigatório!") && (
+							<Error text="O e-mail ou usuário é obrigatório!" fieldError />
 						)}
 					</section>
 					<section className={styles.inputSection}>

@@ -12,23 +12,9 @@ export default function Home() {
 	const router = useRouter()
 	const { userData } = useContext(AuthContext)
 
-	console.log(userData)
-
 	return (
 		<main>
 			<h1>Home</h1>
-			<Button.Root
-				onClick={() => {
-					router.push("sign-in")
-				}}
-			>
-				<Button.Icon icon={PiUserCirclePlusLight} />
-				<Button.Text text="Sign-in" />
-			</Button.Root>
-			<MinimalButton.Root>
-				<MinimalButton.Icon icon={PiUserCirclePlusLight} />
-				<MinimalButton.Text text="test" />
-			</MinimalButton.Root>
 		</main>
 	)
 }

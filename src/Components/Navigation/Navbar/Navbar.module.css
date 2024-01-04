@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0.5rem 4rem;
+	padding: 8px 64px;
 	width: 100%;
 	background: var(--primary-gradient);
 	border-width: 3px;
@@ -36,6 +36,10 @@
 
 .signInIcon {
 	cursor: pointer;
+}
+
+.userProfileImage {
+	border-radius: 512px;
 }
 
 @media (max-width: 768px) {
