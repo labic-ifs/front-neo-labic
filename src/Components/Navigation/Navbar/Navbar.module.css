@@ -12,13 +12,15 @@
 	background: var(--primary-gradient);
 	border-width: 3px;
 	border-style: solid;
-	border-image: var(--border-gradient) 1;
+	border-image: var(--border-gradient) 100;
+	border-image-slice: 1;
 	overflow: hidden;
 	transition: all 0.25s ease-in-out;
 	backdrop-filter: blur(2px);
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 1;
 }
 
 .navToggle {
@@ -52,6 +54,7 @@
 @media (max-width: 768px) {
 	.container {
 		flex-direction: column;
+		padding: 8px 16px;
 	}
 
 	.navToggle {

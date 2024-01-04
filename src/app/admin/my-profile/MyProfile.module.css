@@ -1,3 +1,9 @@
 .container {
-	margin-left: 67px;
+	margin: 2rem 2rem 2rem calc(2rem + 67px);
+}
+
+@media (max-width: 768px) {
+	.container {
+		margin: 1rem 1rem 1rem 1rem;
+	}
 }

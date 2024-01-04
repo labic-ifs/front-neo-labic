@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "./SignIn.module.css"
+import styles from "./Form.module.css"
 import Error from "@/Components/Forms/Error/Error"
 
 import { Button } from "@/Components/Buttons/Button"
@@ -47,7 +47,7 @@ export default function Form() {
 	}
 
 	return (
-		<section className={styles.formContainer}>
+		<section className={styles.container}>
 			<form className={styles.formTag} action={formAction} noValidate>
 				<h1 className={styles.title}>Entre na sua conta Labic!</h1>
 				<section className={styles.inputSection}>

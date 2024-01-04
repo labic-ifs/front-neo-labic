@@ -9,13 +9,15 @@
 	background: var(--primary-gradient);
 	border-width: 3px;
 	border-style: solid;
-	border-image: var(--border-gradient);
+	border-image: var(--border-gradient) 100;
+	border-image-slice: 1;
 	transition: 0.25s ease-in-out;
 	backdrop-filter: blur(2px);
 	position: fixed;
 	top: 0;
 	left: 0;
 	overflow: hidden;
+	z-index: 1;
 }
 
 .logo {
@@ -56,18 +58,20 @@
 	display: none;
 	align-items: center;
 	justify-content: space-between;
-	padding: 8px 64px;
+	padding: 8px 16px;
 	width: 100%;
 	background: var(--primary-gradient);
 	border-width: 3px;
 	border-style: solid;
-	border-image: var(--border-gradient) 1;
+	border-image: var(--border-gradient) 100;
+	border-image-slice: 1;
 	overflow: hidden;
 	transition: all 0.25s ease-in-out;
 	backdrop-filter: blur(2px);
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 1;
 }
 
 .top {

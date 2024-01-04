@@ -8,6 +8,12 @@ type UserType = {
 	id: number
 	profile_image?: string
 	email: string
+	name: string
+	surname: string
+	username?: string
+	course?: string
+	occupation_area?: string
+	description?: string
 	is_superuser?: boolean
 }
 
