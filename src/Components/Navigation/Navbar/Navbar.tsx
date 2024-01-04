@@ -38,14 +38,18 @@ export default function Navbar() {
 	return (
 		<nav
 			className={styles.container}
-			style={navState ? { maxHeight: "48rem" } : { maxHeight: "4.25rem" }}
+			style={navState ? { maxHeight: "48rem" } : { maxHeight: "64px" }}
 		>
 			<section className={styles.left}>
 				<div className={styles.logoContainer}>
 					<Image src="/logo.png" alt="logo" fill />
 				</div>
 				<div className={styles.navToggle}>
-					<Hamburger onToggle={() => setNavState((prevState) => !prevState)}></Hamburger>
+					<Hamburger
+						size={26}
+						rounded
+						onToggle={() => setNavState((prevState) => !prevState)}
+					></Hamburger>
 				</div>
 			</section>
 			<section className={styles.center}>
