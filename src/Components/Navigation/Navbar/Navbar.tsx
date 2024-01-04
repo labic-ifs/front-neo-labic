@@ -38,7 +38,7 @@ export default function Navbar() {
 	return (
 		<nav
 			className={styles.container}
-			style={navState ? { maxHeight: "48rem" } : { maxHeight: "64px" }}
+			style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}
 		>
 			<section className={styles.left}>
 				<div className={styles.logoContainer}>
@@ -46,7 +46,7 @@ export default function Navbar() {
 				</div>
 				<div className={styles.navToggle}>
 					<Hamburger
-						size={26}
+						size={32}
 						rounded
 						onToggle={() => setNavState((prevState) => !prevState)}
 					></Hamburger>
@@ -58,7 +58,7 @@ export default function Navbar() {
 			<section className={styles.right}>
 				<Link href="/sign-in">
 					<IconContext.Provider
-						value={{ className: styles.signInIcon, color: "#fff", size: "3rem" }}
+						value={{ className: styles.signInIcon, color: "#fff", size: "48px" }}
 					>
 						<PiUserCirclePlusLight />
 					</IconContext.Provider>

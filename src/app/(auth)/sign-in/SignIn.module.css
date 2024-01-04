@@ -28,6 +28,10 @@
 	width: 50%;
 }
 
+.title {
+	font-size: 34px;
+}
+
 .inputSection {
 	display: flex;
 	flex-direction: column;
@@ -36,6 +40,7 @@
 
 .inputLabel {
 	font-weight: 600;
+	font-size: 16px;
 }
 
 @media (max-width: 1400px) {

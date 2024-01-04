@@ -65,7 +65,7 @@ export default function SignIn() {
 			/>
 			<section className={styles.formContainer}>
 				<form className={styles.formTag} action={formAction} noValidate>
-					<h1>Entre na sua conta Labic!</h1>
+					<h1 className={styles.title}>Entre na sua conta Labic!</h1>
 					<section className={styles.inputSection}>
 						<p className={styles.inputLabel}>E-mail</p>
 						<Input.Root>
