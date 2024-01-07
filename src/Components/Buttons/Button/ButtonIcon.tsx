@@ -1,3 +1,5 @@
+"use client"
+
 import { ElementType } from "react"
 import { IconContext } from "react-icons"
 
@@ -7,7 +9,7 @@ type ButtonIconProps = {
 
 export default function ButtonIcon({ icon: Icon }: ButtonIconProps) {
 	return (
-		<IconContext.Provider value={{ color: "#fff", size: "1rem" }}>
+		<IconContext.Provider value={{ color: "#fff", size: "16px" }}>
 			<Icon></Icon>
 		</IconContext.Provider>
 	)

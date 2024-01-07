@@ -7,14 +7,17 @@ import Link from "next/link"
 
 import { PiUserCirclePlusLight } from "react-icons/pi"
 import { IconContext } from "react-icons"
-import { useRouter } from "next/navigation"
 import { Squash as Hamburger } from "hamburger-react"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AuthContext } from "@/contexts/AuthContext"
+import { useRouter } from "next/navigation"
 
 export default function Navbar() {
-	const router = useRouter()
-
 	const [navState, setNavState] = useState<boolean>(false)
+
+	const { userData } = useContext(AuthContext)
+
+	const router = useRouter()
 
 	const links = [
 		{
@@ -36,30 +39,60 @@ export default function Navbar() {
 	]
 
 	return (
-		<nav
-			className={styles.container}
-			style={navState ? { maxHeight: "48rem" } : { maxHeight: "4.25rem" }}
-		>
-			<section className={styles.left}>
-				<div className={styles.logoContainer}>
-					<Image src="/logo.png" alt="logo" fill />
-				</div>
-				<div className={styles.navToggle}>
-					<Hamburger onToggle={() => setNavState((prevState) => !prevState)}></Hamburger>
-				</div>
-			</section>
-			<section className={styles.center}>
-				<Links links={links} />
-			</section>
-			<section className={styles.right}>
-				<Link href="/sign-in">
-					<IconContext.Provider
-						value={{ className: styles.signInIcon, color: "#fff", size: "3rem" }}
-					>
-						<PiUserCirclePlusLight />
-					</IconContext.Provider>
-				</Link>
-			</section>
-		</nav>
+		<>
+			<div className={styles.navDummy}></div>
+			<nav
+				className={styles.container}
+				style={navState ? { maxHeight: "48rem" } : { maxHeight: "67px" }}
+			>
+				<section className={styles.left}>
+					<Image
+						className={styles.logoImage}
+						src="/logo.png"
+						alt="logo"
+						width={48}
+						height={48}
+						onClick={() => {
+							router.push("/")
+						}}
+					/>
+					<div className={styles.navToggle}>
+						<Hamburger
+							size={32}
+							rounded
+							onToggle={() => setNavState((prevState) => !prevState)}
+						></Hamburger>
+					</div>
+				</section>
+				<section className={styles.center}>
+					<Links links={links} />
+				</section>
+				<section className={styles.right}>
+					{userData?.profile_image ? (
+						<Link href="/admin/my-profile">
+							<Image
+								className={styles.userProfileImage}
+								src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
+								alt="profile image"
+								width={48}
+								height={48}
+							/>
+						</Link>
+					) : (
+						<Link href="/sign-in">
+							<IconContext.Provider
+								value={{
+									className: styles.signInIcon,
+									color: "#fff",
+									size: "48px",
+								}}
+							>
+								<PiUserCirclePlusLight />
+							</IconContext.Provider>
+						</Link>
+					)}
+				</section>
+			</nav>
+		</>
 	)
 }

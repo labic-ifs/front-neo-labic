@@ -8,18 +8,24 @@ type UserType = {
 	id: number
 	profile_image?: string
 	email: string
+	name: string
+	surname: string
+	username?: string
+	course?: string
+	occupation_area?: string
+	description?: string
 	is_superuser?: boolean
 }
 
 type SignInData = {
-	email: string
-	password: string
+	key?: string
+	password?: string
 }
 
 type AuthContext = {
 	isAuthenticated: boolean
 	userData: UserType | null
-	signIn: ({ email, password }: SignInData) => Promise<string>
+	signIn: ({ key, password }: SignInData) => Promise<string>
 }
 
 export const AuthContext = createContext({} as AuthContext)
@@ -53,13 +59,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 		}
 	})
 
-	async function signIn({ email, password }: SignInData) {
+	async function signIn({ key, password }: SignInData) {
 		const { token, user, success, error } = await fetch(
 			`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/authenticateUser/`,
 			{
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email: email, password: password }),
+				body: JSON.stringify({ key: key, password: password }),
 			}
 		).then((res) => res.json())
 

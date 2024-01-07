@@ -1,0 +1,109 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	/*align-items: center;*/
+	gap: 8px;
+	padding: 16px 8px;
+	height: 100vh;
+	max-width: 70px;
+	background: var(--primary-gradient);
+	border-width: 3px;
+	border-style: solid;
+	border-image: var(--border-gradient) 100;
+	border-image-slice: 1;
+	transition: 0.25s ease-in-out;
+	backdrop-filter: blur(2px);
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.logo {
+	position: relative;
+	width: 48px;
+	height: 48px;
+}
+
+.logoSection {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	cursor: pointer;
+}
+
+.navTitle {
+	font-size: 12px;
+	white-space: nowrap;
+	padding-right: 1rem;
+	transition: 0.25s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.myAccountSection {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+/* Mobile */
+
+.mobileNavDummy {
+	display: none;
+	width: 100%;
+	height: 67px;
+}
+
+.mobileContainer {
+	display: none;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 16px;
+	width: 100%;
+	background: var(--primary-gradient);
+	border-width: 3px;
+	border-style: solid;
+	border-image: var(--border-gradient) 100;
+	border-image-slice: 1;
+	overflow: hidden;
+	transition: all 0.25s ease-in-out;
+	backdrop-filter: blur(2px);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.top {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.mobileLogo {
+	cursor: pointer;
+}
+
+.bottom {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	flex-direction: column;
+}
+
+@media (max-width: 768px) {
+	.container {
+		display: none;
+	}
+
+	.mobileNavDummy {
+		display: block;
+	}
+
+	.mobileContainer {
+		display: flex;
+		flex-direction: column;
+	}
+}
