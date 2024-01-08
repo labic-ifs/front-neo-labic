@@ -5,7 +5,7 @@ import { setCookie, parseCookies } from "nookies"
 import { useRouter } from "next/navigation"
 
 type UserType = {
-	id: number
+	id: string
 	profile_image?: string
 	email: string
 	name: string

@@ -16,13 +16,23 @@ export default function MyProfileWidget() {
 		<section className={styles.container}>
 			<div className={styles.topContainer}>
 				<div className={styles.mainInfoContainer}>
-					<Image
-						className={styles.profileImage}
-						src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
-						alt="profile image"
-						width={512}
-						height={512}
-					></Image>
+					{userData?.profile_image ? (
+						<Image
+							className={styles.profileImage}
+							src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
+							alt="profile image"
+							width={512}
+							height={512}
+						></Image>
+					) : (
+						<Image
+							className={styles.profileImage}
+							src={"/user/profile-image.png"}
+							alt="profile image"
+							width={512}
+							height={512}
+						></Image>
+					)}
 					<div className={styles.textInfoContainer}>
 						<div>
 							<h1 className={styles.title}>

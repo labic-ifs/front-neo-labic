@@ -28,6 +28,10 @@ body {
 	background-color: var(--primary-bg);
 }
 
+p {
+	font-size: 16px;
+}
+
 ::placeholder {
 	color: var(--soft-color);
 	opacity: 1; /* Firefox */
