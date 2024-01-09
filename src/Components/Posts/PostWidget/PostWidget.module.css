@@ -35,8 +35,36 @@
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	gap: 1rem;
 }
 
 .title {
 	font-size: 34px;
+}
+
+.description {
+	overflow: hidden;
+	width: 100%;
+	height: auto;
+	text-overflow: ellipsis;
+}
+
+@media (max-width: 1200px) {
+	.container {
+		flex-direction: column;
+	}
+
+	.postCover {
+		border-radius: 1rem 1rem 0 0;
+		width: 100%;
+		height: auto;
+	}
+
+	.titleContainer {
+		flex-direction: column;
+	}
+
+	.description {
+		margin: 1rem 0;
+	}
 }

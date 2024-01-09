@@ -1,3 +1,7 @@
+"use client"
+
+import styles from "./MarkdownParser.module.css"
+
 import "./markdown.css"
 import Markdown from "react-markdown"
 import remarkRehype from "remark-rehype"
@@ -13,11 +17,26 @@ type MarkdownParserProps = {
 	markdownBody: string
 }
 
-export default async function MarkdownParser({ markdownBody }: MarkdownParserProps) {
-	const { content, metadata } = metadataParser(markdownBody)
+export default function MarkdownParser({ markdownBody }: MarkdownParserProps) {
+	const data = () => {
+		try {
+			const { content, metadata } = metadataParser(markdownBody)
+
+			return { content, metadata }
+		} catch {
+			return { content: "", metadata: { description: "Aguandando metadados." } }
+		}
+	}
+
+	const { content, metadata } = data()
 
 	return (
 		<div>
+			{metadata?.title ? (
+				<h1 className={styles.title}>{metadata?.title}</h1>
+			) : (
+				<h1 className={styles.title}>Sem Título</h1>
+			)}
 			<div className={"markdown-body"}>
 				<Markdown
 					remarkPlugins={[

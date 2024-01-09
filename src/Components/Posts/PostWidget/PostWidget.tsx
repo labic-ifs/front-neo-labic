@@ -1,6 +1,7 @@
 "use client"
 
 import styles from "./PostWidget.module.css"
+import "./PostWidget.css"
 
 import Image from "next/image"
 
@@ -44,8 +45,13 @@ export default function PostWidget({ markdownItem }: PostWidgetProps) {
 			<div className={styles.infoContainer}>
 				<div>
 					<div className={styles.titleContainer}>
-						<h1 className={styles.title}>{metadata?.title}</h1>
+						{metadata?.title ? (
+							<h1 className={styles.title}>{metadata?.title}</h1>
+						) : (
+							<h1 className={styles.title}>Sem Título</h1>
+						)}
 						<Button.Root
+							id={`topEditBtn`}
 							onClick={() => {
 								router.push(`/admin/my-articles/edit/${markdownItem.id}`)
 							}}
@@ -54,15 +60,24 @@ export default function PostWidget({ markdownItem }: PostWidgetProps) {
 						</Button.Root>
 					</div>
 					{metadata?.description ? (
-						<p>
-							{metadata?.description.slice(0, 300)}{" "}
-							{metadata?.description.lenght > 300 && "..."}
+						<p className={styles.description}>
+							{metadata?.description.slice(0, 225)}
+							{[...metadata?.description].reduce((a: number) => a + 1, 0) > 225 &&
+								"..."}
 						</p>
 					) : (
 						<p>Descrição não inserida.</p>
 					)}
 				</div>
 				<p>{postDate}</p>
+				<Button.Root
+					id={`bottomEditBtn`}
+					onClick={() => {
+						router.push(`/admin/my-articles/edit/${markdownItem.id}`)
+					}}
+				>
+					<Button.Text text="Editar" />
+				</Button.Root>
 			</div>
 		</div>
 	)
