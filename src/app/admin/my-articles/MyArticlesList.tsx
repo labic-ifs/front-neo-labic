@@ -25,7 +25,7 @@ export default function MyArticlesList({ articles }: MyArticlesListProps) {
 				<Input.Tag name="search" placeholder="Robô para OBR" />
 			</Input.Root>
 			{articles.map((item) => {
-				return <PostWidget markdownItem={item} />
+				return <PostWidget key={item.id} markdownItem={item} />
 			})}
 		</section>
 	)
