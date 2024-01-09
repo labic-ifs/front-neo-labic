@@ -12,7 +12,7 @@
 	border-image: var(--border-gradient) 100;
 	border-image-slice: 1;
 	transition: 0.25s ease-in-out;
-	backdrop-filter: blur(2px);
+	backdrop-filter: blur(3px);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -67,7 +67,7 @@
 	border-image-slice: 1;
 	overflow: hidden;
 	transition: all 0.25s ease-in-out;
-	backdrop-filter: blur(2px);
+	backdrop-filter: blur(3px);
 	position: fixed;
 	top: 0;
 	left: 0;
