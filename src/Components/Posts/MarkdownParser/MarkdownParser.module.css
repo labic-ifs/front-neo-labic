@@ -1,3 +1,13 @@
 .title {
 	font-size: 34px;
 }
+
+.cover {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+.description {
+	margin: 0.5rem 0;
+}

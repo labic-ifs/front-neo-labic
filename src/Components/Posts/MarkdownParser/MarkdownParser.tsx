@@ -3,6 +3,7 @@
 import styles from "./MarkdownParser.module.css"
 
 import "./markdown.css"
+import Image from "next/image"
 import Markdown from "react-markdown"
 import remarkRehype from "remark-rehype"
 import remarkToc from "remark-toc"
@@ -36,6 +37,20 @@ export default function MarkdownParser({ markdownBody }: MarkdownParserProps) {
 				<h1 className={styles.title}>{metadata?.title}</h1>
 			) : (
 				<h1 className={styles.title}>Sem Título</h1>
+			)}
+			{metadata?.description ? (
+				<p className={styles.description}>{metadata?.description}</p>
+			) : (
+				<p className={styles.description}>Descrição não inserida.</p>
+			)}
+			{metadata?.cover && (
+				<Image
+					className={styles.cover}
+					src={metadata?.cover}
+					alt="image"
+					width={1280}
+					height={720}
+				></Image>
 			)}
 			<div className={"markdown-body"}>
 				<Markdown

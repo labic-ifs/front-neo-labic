@@ -9,7 +9,7 @@ import { revalidatePathAfterSendAticle } from "@/lib/actions"
 import { MinimalButton } from "@/Components/Buttons/MinimalButton"
 import { Button } from "@/Components/Buttons/Button"
 import { FaArrowLeft } from "react-icons/fa"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { ChangeEvent, useEffect, useState } from "react"
 import { parseCookies } from "nookies"
 import { useFormState } from "react-dom"
@@ -20,6 +20,7 @@ type EditArticleWidgetProps = {
 
 export default function EditArticleWidget({ markdownBody }: EditArticleWidgetProps) {
 	const router = useRouter()
+	const path = usePathname()
 	const [textBody, setTextBody] = useState<string>(markdownBody.body)
 	const [state, formAction] = useFormState(updateArticle, undefined)
 
@@ -54,7 +55,7 @@ export default function EditArticleWidget({ markdownBody }: EditArticleWidgetPro
 				)
 
 				if (payload.ok) {
-					revalidatePathAfterSendAticle()
+					revalidatePathAfterSendAticle(path)
 					router.push("/admin/my-articles/")
 				} else {
 					return { error: "Something went wrong." }
