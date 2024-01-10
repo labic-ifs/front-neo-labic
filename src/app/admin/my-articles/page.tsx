@@ -23,7 +23,7 @@ const getMyArticles = async () => {
 		`${process.env.NEXT_PUBLIC_BACKEND_HOST}articles/getUserArticles/${user.id}`
 	).then((res) => res.json())
 
-	return articles[0].articles
+	return articles[0].articles.reverse()
 }
 
 export default async function MyArticles() {
