@@ -1,10 +1,11 @@
 import styles from "./MyArticles.module.css"
 
-import MyArticlesList from "./MyArticlesList"
+import PostWidget from "@/Components/Posts/PostWidget/PostWidget"
 
-import { useContext } from "react"
-import { AuthContext } from "@/contexts/AuthContext"
-import { cookies, headers } from "next/headers"
+import { Input } from "@/Components/Forms/Input"
+import CreateArticleButton from "@/Components/Posts/shortcuts/CreateArticleButton/CreateArticleButton"
+
+import { cookies } from "next/headers"
 
 export const metadata = {
 	title: "Meus Artigos",
@@ -23,15 +24,31 @@ const getMyArticles = async () => {
 		`${process.env.NEXT_PUBLIC_BACKEND_HOST}articles/getUserArticles/${user.id}`
 	).then((res) => res.json())
 
-	return articles[0].articles.reverse()
+	return { articles: articles[0].articles.reverse() }
+}
+
+type MyArticlesProps = {
+	articles: { id: string; body: string; user_id: string; created_at: Date }[]
 }
 
 export default async function MyArticles() {
-	const articles = await getMyArticles()
+	const { articles }: MyArticlesProps = await getMyArticles()
 
 	return (
 		<main className={styles.container}>
-			<MyArticlesList articles={articles} />
+			<section className={styles.listContainer}>
+				<div className={styles.headerContainer}>
+					<h1>Meus Artigos</h1>
+					<CreateArticleButton></CreateArticleButton>
+				</div>
+				<Input.Root>
+					<Input.Icon serverSide serverSideIconType="search" />
+					<Input.Tag name="search" placeholder="Robô para OBR" />
+				</Input.Root>
+				{articles?.map((item) => {
+					return <PostWidget key={item.id} markdownItem={item} />
+				})}
+			</section>
 		</main>
 	)
 }

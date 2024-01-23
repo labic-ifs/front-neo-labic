@@ -25,23 +25,23 @@ export default function PostWidget({ markdownItem }: PostWidgetProps) {
 
 	return (
 		<div className={styles.container}>
-			{metadata?.cover ? (
-				<Image
-					className={styles.postCover}
-					src={metadata?.cover}
-					alt="post image"
-					width={300}
-					height={169}
-				></Image>
-			) : (
-				<Image
-					className={styles.postCover}
-					src={"/posts/blank-post.png"}
-					alt="post image"
-					width={300}
-					height={169}
-				></Image>
-			)}
+			<div className={styles.postCoverContainer}>
+				{metadata?.cover ? (
+					<Image
+						className={styles.postCover}
+						src={metadata?.cover}
+						alt="post image"
+						fill
+					></Image>
+				) : (
+					<Image
+						className={styles.postCover}
+						src={"/posts/blank-post.png"}
+						alt="post image"
+						fill
+					></Image>
+				)}
+			</div>
 			<div className={styles.infoContainer}>
 				<div>
 					<div className={styles.titleContainer}>
@@ -61,12 +61,12 @@ export default function PostWidget({ markdownItem }: PostWidgetProps) {
 					</div>
 					{metadata?.description ? (
 						<p className={styles.description}>
-							{metadata?.description.slice(0, 225)}
-							{[...metadata?.description].reduce((a: number) => a + 1, 0) > 225 &&
+							{metadata?.description.slice(0, 450)}
+							{[...metadata?.description].reduce((a: number) => a + 1, 0) > 450 &&
 								"..."}
 						</p>
 					) : (
-						<p>Descrição não inserida.</p>
+						<p className={styles.description}>Descrição não inserida.</p>
 					)}
 				</div>
 				<p>{postDate}</p>

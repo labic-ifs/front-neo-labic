@@ -3,7 +3,6 @@
 	display: flex;
 	background: var(--primary-gradient);
 	border-radius: 1rem;
-	position: relative;
 }
 
 .container::before {
@@ -19,7 +18,14 @@
 	z-index: -1;
 }
 
+.postCoverContainer {
+	position: relative;
+	height: auto;
+	width: 50vh;
+}
+
 .postCover {
+	object-fit: cover;
 	border-radius: 1rem 0 0 1rem;
 }
 
@@ -44,6 +50,7 @@
 
 .description {
 	overflow: hidden;
+	margin: 0.75rem 0 1rem 0;
 	width: 100%;
 	height: auto;
 	text-overflow: ellipsis;
@@ -54,10 +61,13 @@
 		flex-direction: column;
 	}
 
+	.postCoverContainer {
+		height: 50vw;
+		width: 100%;
+	}
+
 	.postCover {
 		border-radius: 1rem 1rem 0 0;
-		width: 100%;
-		height: auto;
 	}
 
 	.titleContainer {

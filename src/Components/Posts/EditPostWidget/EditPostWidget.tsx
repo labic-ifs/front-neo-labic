@@ -1,24 +1,22 @@
 "use client"
 
-import styles from "./EditArticleWidget.module.css"
+import styles from "./EditPostWidget.module.css"
 
 import MarkdownParser from "@/Components/Posts/MarkdownParser/MarkdownParser"
 import Error from "@/Components/Forms/Error/Error"
-import { revalidatePathAfterSendAticle } from "@/lib/actions"
+import { revalidatePaths } from "@/lib/actions"
 
-import { MinimalButton } from "@/Components/Buttons/MinimalButton"
 import { Button } from "@/Components/Buttons/Button"
-import { FaArrowLeft } from "react-icons/fa"
 import { usePathname, useRouter } from "next/navigation"
 import { ChangeEvent, useEffect, useState } from "react"
 import { parseCookies } from "nookies"
 import { useFormState } from "react-dom"
 
-type EditArticleWidgetProps = {
+type EditPostWidgetProps = {
 	markdownBody: { id: string; body: string; user_id: string; created_at: Date }
 }
 
-export default function EditArticleWidget({ markdownBody }: EditArticleWidgetProps) {
+export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 	const router = useRouter()
 	const path = usePathname()
 	const [textBody, setTextBody] = useState<string>(markdownBody.body)
@@ -55,13 +53,13 @@ export default function EditArticleWidget({ markdownBody }: EditArticleWidgetPro
 				)
 
 				if (payload.ok) {
-					revalidatePathAfterSendAticle(path)
-					router.push("/admin/my-articles/")
+					revalidatePaths(path)
+					revalidatePaths("/admin/my-articles")
+					router.push("/admin/my-articles")
 				} else {
-					return { error: "Something went wrong." }
+					return { error: "It was not possible to save your article." }
 				}
 			} catch (err) {
-				console.log(err)
 				return { error: "Something went wrong." }
 			}
 		} else {
@@ -71,12 +69,6 @@ export default function EditArticleWidget({ markdownBody }: EditArticleWidgetPro
 
 	return (
 		<section className={styles.container}>
-			<div>
-				<MinimalButton.Root onClick={() => router.push("/admin/my-articles")}>
-					<MinimalButton.Icon icon={FaArrowLeft} />
-					<MinimalButton.Text text="voltar" />
-				</MinimalButton.Root>
-			</div>
 			<form className={styles.form} action={formAction}>
 				<div className={styles.titleContainer}>
 					<h1 className={styles.title}>Edite seu Artigo</h1>
@@ -86,6 +78,9 @@ export default function EditArticleWidget({ markdownBody }: EditArticleWidgetPro
 				</div>
 				{state?.error === "User not authenticated." && (
 					<Error text="Usuário não authenticado." />
+				)}
+				{state?.error === "It was not possible to save your article." && (
+					<Error text="Não foi possível salvar seu artigo." />
 				)}
 				{state?.error === "Something went wrong." && <Error text="Algo deu errado." />}
 				<div className={styles.editPreviewAreasContainer}>
