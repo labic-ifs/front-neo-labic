@@ -27,12 +27,12 @@ const getMyArticles = async () => {
 	return { articles: articles[0].articles.reverse() }
 }
 
-type MyArticlesProps = {
+type MyArticlesTypes = {
 	articles: { id: string; body: string; user_id: string; created_at: Date }[]
 }
 
 export default async function MyArticles() {
-	const { articles }: MyArticlesProps = await getMyArticles()
+	const { articles }: MyArticlesTypes = await getMyArticles()
 
 	return (
 		<main className={styles.container}>

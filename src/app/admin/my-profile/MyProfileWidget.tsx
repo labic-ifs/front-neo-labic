@@ -36,7 +36,7 @@ export default function MyProfileWidget() {
 					<div className={styles.textInfoContainer}>
 						<div>
 							<h1 className={styles.title}>
-								{userData?.name} {userData?.surname}
+								{userData?.first_name} {userData?.last_name}
 							</h1>
 							{userData?.course ? (
 								<p>{userData?.course}</p>

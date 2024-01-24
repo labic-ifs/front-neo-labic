@@ -8,13 +8,14 @@ type UserType = {
 	id: string
 	profile_image?: string
 	email: string
-	name: string
-	surname: string
+	first_name: string
+	last_name: string
 	username?: string
 	course?: string
 	occupation_area?: string
 	description?: string
 	is_superuser?: boolean
+	is_active?: boolean
 }
 
 type SignInData = {

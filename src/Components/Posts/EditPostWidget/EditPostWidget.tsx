@@ -55,7 +55,7 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 				if (payload.ok) {
 					revalidatePaths(path)
 					revalidatePaths("/admin/my-articles")
-					router.push("/admin/my-articles")
+					router.back()
 				} else {
 					return { error: "It was not possible to save your article." }
 				}
