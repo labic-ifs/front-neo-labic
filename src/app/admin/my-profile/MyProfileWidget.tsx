@@ -6,11 +6,11 @@ import Image from "next/image"
 import { AuthContext } from "@/contexts/AuthContext"
 import { useContext } from "react"
 import { Button } from "@/Components/Buttons/Button"
+import { useRouter } from "next/navigation"
 
 export default function MyProfileWidget() {
 	const { userData } = useContext(AuthContext)
-
-	console.log(userData)
+	const router = useRouter()
 
 	return (
 		<section className={styles.container}>
@@ -57,7 +57,11 @@ export default function MyProfileWidget() {
 				<div className={styles.otherInfoContainer}>
 					<div className={styles.otherInfoHeaderContainer}>
 						<h1 className={styles.title}>Dados</h1>
-						<Button.Root>
+						<Button.Root
+							onClick={() => {
+								router.push(`/admin/my-profile/edit/${userData?.id}`)
+							}}
+						>
 							<Button.Text text="Editar" />
 						</Button.Root>
 					</div>

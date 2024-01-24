@@ -42,6 +42,7 @@
 	height: 100%;
 	display: grid;
 	place-items: center;
+	padding: 2rem 0;
 }
 
 .underDevelopmentWarnWrapper {
@@ -53,6 +54,21 @@
 .underDevelopmentWarn {
 	font-weight: bold;
 	font-size: 20px;
+}
+
+.underDevelopmentImage {
+	width: 80%;
+	height: auto;
+}
+
+@media (max-width: 1200px) {
+	.areasContainer {
+		flex-direction: column;
+	}
+
+	.sectionContainer {
+		max-width: 100%;
+	}
 }
 
 @media (max-width: 768px) {

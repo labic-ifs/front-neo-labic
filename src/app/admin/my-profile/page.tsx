@@ -33,7 +33,6 @@ type MyArticlesTypes = {
 
 export default async function MyProfile() {
 	const { articles }: MyArticlesTypes = await getMyArticles()
-	console.log(articles)
 
 	return (
 		<main className={styles.container}>
@@ -44,6 +43,7 @@ export default async function MyProfile() {
 					<div className={styles.underDevelopmentWarnContainer}>
 						<div className={styles.underDevelopmentWarnWrapper}>
 							<Image
+								className={styles.underDevelopmentImage}
 								src={"/dev/under-development-illustration.svg"}
 								alt="under development illustration"
 								width={500}

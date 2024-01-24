@@ -36,6 +36,11 @@ p {
 	font-size: 16px;
 }
 
+input[type="file"] {
+	background-color: transparent;
+	border: none;
+}
+
 ::placeholder {
 	color: var(--soft-color);
 	opacity: 1; /* Firefox */
