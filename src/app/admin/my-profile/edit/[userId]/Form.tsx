@@ -24,7 +24,7 @@ type formDataTypes = {
 	course?: string
 	occupationArea?: string
 	description?: string
-	profileImage?: File
+	profileImage?: File | null
 }
 
 const imageSchema = object().shape({
@@ -92,11 +92,12 @@ export default function EditMyProfileForm() {
 	}
 
 	const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files
 		setFormData((prevData) => ({
 			...prevData,
-			[event?.target.name]: event.target.files[0],
+			[event.target.name]: file?.item(0),
 		}))
-		setFileName(event.target.files[0].name)
+		setFileName(file?.item(0)?.name)
 	}
 
 	async function handleSubmit() {
