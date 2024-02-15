@@ -24,7 +24,7 @@ const getMyArticles = async () => {
 		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getUserArticles/${user.id}`
 	).then((res) => res.json())
 
-	return { articles: articles[0].articles?.reverse().slice(0, 3) }
+	return { articles: articles[0].posts?.reverse().slice(0, 3) }
 }
 
 type MyArticlesTypes = {
@@ -56,7 +56,7 @@ export default async function MyProfile() {
 				<section className={styles.sectionContainer}>
 					<h1>Meus Artigos</h1>
 					{articles.map((item) => {
-						return <PostWidget markdownItem={item} key={item.id}></PostWidget>
+						return <PostWidget markdownItem={item} key={item.id} isReduced></PostWidget>
 					})}
 					<Link className={styles.seeAllArticles} href={"/admin/my-articles"}>
 						<Button.Root fullWidth>

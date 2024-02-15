@@ -15,9 +15,10 @@ const metadataParser = require("markdown-yaml-metadata-parser")
 
 type PostWidgetProps = {
 	markdownItem: { id: string; body: string; user_id: string; created_at: Date }
+	isReduced: boolean
 }
 
-export default function PostWidget({ markdownItem }: PostWidgetProps) {
+export default function PostWidget({ markdownItem, isReduced }: PostWidgetProps) {
 	const { metadata } = metadataParser(markdownItem.body)
 	const postDate = moment(markdownItem.created_at).locale("pt-br").format("DD [de] MMMM, YYYY")
 
@@ -46,7 +47,15 @@ export default function PostWidget({ markdownItem }: PostWidgetProps) {
 				<div>
 					<div className={styles.titleContainer}>
 						{metadata?.title ? (
-							<h1 className={styles.title}>{metadata?.title}</h1>
+							isReduced ? (
+								<h1 className={styles.title}>
+									{metadata?.title.slice(0, 24)}
+									{[...metadata?.title].reduce((a: number) => a + 1, 0) > 24 &&
+										"..."}
+								</h1>
+							) : (
+								<h1 className={styles.title}>{metadata?.title}</h1>
+							)
 						) : (
 							<h1 className={styles.title}>Sem Título</h1>
 						)}
@@ -60,11 +69,19 @@ export default function PostWidget({ markdownItem }: PostWidgetProps) {
 						</Button.Root>
 					</div>
 					{metadata?.description ? (
-						<p className={styles.description}>
-							{metadata?.description.slice(0, 450)}
-							{[...metadata?.description].reduce((a: number) => a + 1, 0) > 450 &&
-								"..."}
-						</p>
+						isReduced ? (
+							<p className={styles.description}>
+								{metadata?.description.slice(0, 125)}
+								{[...metadata?.description].reduce((a: number) => a + 1, 0) > 125 &&
+									"..."}
+							</p>
+						) : (
+							<p className={styles.description}>
+								{metadata?.description.slice(0, 450)}
+								{[...metadata?.description].reduce((a: number) => a + 1, 0) > 450 &&
+									"..."}
+							</p>
+						)
 					) : (
 						<p className={styles.description}>Descrição não inserida.</p>
 					)}
