@@ -2,7 +2,7 @@ import { cookies } from "next/headers"
 import styles from "./MyProfile.module.css"
 
 import MyProfileWidget from "./MyProfileWidget"
-import PostWidget from "@/Components/Posts/PostWidget/PostWidget"
+import AdminPostWidget from "@/Components/Posts/PostWidgets/AdminPostWidget"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/Components/Buttons/Button"
@@ -56,7 +56,13 @@ export default async function MyProfile() {
 				<section className={styles.sectionContainer}>
 					<h1>Meus Artigos</h1>
 					{articles.map((item) => {
-						return <PostWidget markdownItem={item} key={item.id} isReduced></PostWidget>
+						return (
+							<AdminPostWidget
+								markdownItem={item}
+								key={item.id}
+								isReduced
+							></AdminPostWidget>
+						)
 					})}
 					<Link className={styles.seeAllArticles} href={"/admin/my-articles"}>
 						<Button.Root fullWidth>

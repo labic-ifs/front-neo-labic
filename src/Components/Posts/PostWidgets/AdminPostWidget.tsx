@@ -15,10 +15,10 @@ const metadataParser = require("markdown-yaml-metadata-parser")
 
 type PostWidgetProps = {
 	markdownItem: { id: string; body: string; user_id: string; created_at: Date }
-	isReduced: boolean
+	isReduced?: boolean
 }
 
-export default function PostWidget({ markdownItem, isReduced }: PostWidgetProps) {
+export default function AdminPostWidget({ markdownItem, isReduced }: PostWidgetProps) {
 	const { metadata } = metadataParser(markdownItem.body)
 	const postDate = moment(markdownItem.created_at).locale("pt-br").format("DD [de] MMMM, YYYY")
 

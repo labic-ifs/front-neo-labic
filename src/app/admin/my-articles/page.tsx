@@ -1,6 +1,6 @@
 import styles from "./MyArticles.module.css"
 
-import PostWidget from "@/Components/Posts/PostWidget/PostWidget"
+import AdminPostWidget from "@/Components/Posts/PostWidgets/AdminPostWidget"
 
 import { Input } from "@/Components/Forms/Input"
 import CreatePostButton from "@/Components/Posts/shortcuts/CreatePostButton/CreatePostButton"
@@ -47,7 +47,7 @@ export default async function MyArticles() {
 					<Input.Tag name="search" placeholder="Robô para OBR" />
 				</Input.Root>
 				{articles?.map((item) => {
-					return <PostWidget key={item.id} markdownItem={item} />
+					return <AdminPostWidget key={item.id} markdownItem={item} />
 				})}
 			</section>
 		</main>
