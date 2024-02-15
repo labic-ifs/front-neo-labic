@@ -3,7 +3,7 @@ import styles from "./MyArticles.module.css"
 import PostWidget from "@/Components/Posts/PostWidget/PostWidget"
 
 import { Input } from "@/Components/Forms/Input"
-import CreateArticleButton from "@/Components/Posts/shortcuts/CreateArticleButton/CreateArticleButton"
+import CreatePostButton from "@/Components/Posts/shortcuts/CreatePostButton/CreatePostButton"
 
 import { cookies } from "next/headers"
 
@@ -21,10 +21,11 @@ const getMyArticles = async () => {
 	}).then((res) => res.json())
 
 	const articles = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_HOST}articles/getUserArticles/${user.id}`
+		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getUserArticles/${user.id}`
 	).then((res) => res.json())
 
-	return { articles: articles[0].articles.reverse() }
+	console.log(articles)
+	return { articles: articles[0].posts?.reverse() }
 }
 
 type MyArticlesTypes = {
@@ -39,7 +40,7 @@ export default async function MyArticles() {
 			<section className={styles.listContainer}>
 				<div className={styles.headerContainer}>
 					<h1>Meus Artigos</h1>
-					<CreateArticleButton></CreateArticleButton>
+					<CreatePostButton></CreatePostButton>
 				</div>
 				<Input.Root>
 					<Input.Icon serverSide serverSideIconType="search" />

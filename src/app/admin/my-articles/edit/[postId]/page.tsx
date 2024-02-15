@@ -7,18 +7,17 @@ export const metadata = {
 	title: "Editar Artigo",
 }
 
-const getArticle = async (articleId: string) => {
-	const article = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_HOST}articles/getArticle/${articleId}`,
-		{ cache: "no-store" }
-	).then((res) => res.json())
-
-	return article.article
+const getPost = async (postId: string) => {
+	const post = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getPost/${postId}`, {
+		cache: "no-store",
+	}).then((res) => res.json())
+	console.log(post)
+	return post.post
 }
 
 export default async function EditArticle({ params }: any) {
-	const articleId = params.articleId
-	const articleData = await getArticle(articleId)
+	const postId = params.postId
+	const articleData = await getPost(postId)
 
 	return (
 		<main className={styles.container}>

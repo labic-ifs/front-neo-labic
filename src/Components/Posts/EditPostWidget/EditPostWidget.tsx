@@ -20,7 +20,7 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 	const router = useRouter()
 	const path = usePathname()
 	const [textBody, setTextBody] = useState<string>(markdownBody.body)
-	const [state, formAction] = useFormState(updateArticle, undefined)
+	const [state, formAction] = useFormState(updatePost, undefined)
 
 	useEffect(() => {
 		const textAreaElement: HTMLTextAreaElement | null = document.querySelector("#textarea")
@@ -35,13 +35,13 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 		setTextBody(event.target.value)
 	}
 
-	async function updateArticle() {
+	async function updatePost() {
 		const { labicToken: token } = parseCookies()
 
 		if (token) {
 			try {
 				const payload = await fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_HOST}articles/updateArticle/${markdownBody.id}`,
+					`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/updatePost/${markdownBody.id}`,
 					{
 						method: "PUT",
 						headers: {
@@ -57,7 +57,7 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 					revalidatePaths("/admin/my-articles")
 					router.back()
 				} else {
-					return { error: "It was not possible to save your article." }
+					return { error: "It was not possible to save your post." }
 				}
 			} catch (err) {
 				return { error: "Something went wrong." }
@@ -71,7 +71,7 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 		<section className={styles.container}>
 			<form className={styles.form} action={formAction}>
 				<div className={styles.titleContainer}>
-					<h1 className={styles.title}>Edite seu Artigo</h1>
+					<h1 className={styles.title}>Edite seu Post</h1>
 					<Button.Root>
 						<Button.Text text="salvar" />
 					</Button.Root>
@@ -79,8 +79,8 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 				{state?.error === "User not authenticated." && (
 					<Error text="Usuário não authenticado." />
 				)}
-				{state?.error === "It was not possible to save your article." && (
-					<Error text="Não foi possível salvar seu artigo." />
+				{state?.error === "It was not possible to save your post." && (
+					<Error text="Não foi possível salvar seu post." />
 				)}
 				{state?.error === "Something went wrong." && <Error text="Algo deu errado." />}
 				<div className={styles.editPreviewAreasContainer}>
