@@ -14,6 +14,10 @@ const nextConfig = {
 				protocol: "http",
 				hostname: "api.labic.dev.br",
 			},
+			{
+				protocol: "https",
+				hostname: "api.labic.dev.br",
+			},
 		],
 	},
 }

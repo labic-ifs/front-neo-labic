@@ -73,13 +73,13 @@ export default function EditMyProfileForm() {
 
 	useEffect(() => {
 		setFormData({
-			email: userData?.email,
-			firstName: userData?.first_name,
-			lastName: userData?.last_name,
-			username: userData?.username,
-			course: userData?.course,
-			occupationArea: userData?.occupation_area,
-			description: userData?.description,
+			email: userData?.email || "",
+			firstName: userData?.first_name || "",
+			lastName: userData?.last_name || "",
+			username: userData?.username || "",
+			course: userData?.course || "",
+			occupationArea: userData?.occupation_area || "",
+			description: userData?.description || "",
 		})
 	}, [userData])
 
@@ -216,7 +216,7 @@ export default function EditMyProfileForm() {
 									name="username"
 									type="text"
 									placeholder="labic.ifs"
-									value={formData.username}
+									value={formData.username ? formData.username : ""}
 									getValue={getValue}
 								/>
 							</Input.Root>
@@ -239,7 +239,7 @@ export default function EditMyProfileForm() {
 									name="email"
 									type="email"
 									placeholder="labic@gmail.com"
-									value={formData.email}
+									value={formData.email ? formData.email : ""}
 									getValue={getValue}
 								/>
 							</Input.Root>
@@ -256,7 +256,7 @@ export default function EditMyProfileForm() {
 									name="firstName"
 									type="text"
 									placeholder="Stephanie"
-									value={formData.firstName}
+									value={formData.firstName ? formData.firstName : ""}
 									getValue={getValue}
 								/>
 							</Input.Root>
@@ -271,7 +271,7 @@ export default function EditMyProfileForm() {
 									name="lastName"
 									type="text"
 									placeholder="Kamarry Alves"
-									value={formData.lastName}
+									value={formData.lastName ? formData.lastName : ""}
 									getValue={getValue}
 								/>
 							</Input.Root>
@@ -288,7 +288,7 @@ export default function EditMyProfileForm() {
 									name="course"
 									type="text"
 									placeholder="Integrado em Redes de Computadores"
-									value={formData.course}
+									value={formData.course ? formData.course : ""}
 									getValue={getValue}
 								/>
 							</Input.Root>
@@ -300,7 +300,7 @@ export default function EditMyProfileForm() {
 									name="occupationArea"
 									type="text"
 									placeholder="Web Design, Web Development, IoT"
-									value={formData.occupationArea}
+									value={formData.occupationArea ? formData.occupationArea : ""}
 									getValue={getValue}
 								/>
 							</Input.Root>
@@ -313,7 +313,7 @@ export default function EditMyProfileForm() {
 								name="description"
 								type="text"
 								placeholder="Sou um estudante do Instituto Federal de Sergipe..."
-								value={formData.description}
+								value={formData.description ? formData.description : ""}
 								getValue={getValue}
 							/>
 						</Input.Root>

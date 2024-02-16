@@ -11,6 +11,7 @@ import { Squash as Hamburger } from "hamburger-react"
 import { useContext, useState } from "react"
 import { AuthContext } from "@/contexts/AuthContext"
 import { useRouter } from "next/navigation"
+import { PiUserCircleLight } from "react-icons/pi"
 
 export default function Navbar() {
 	const [navState, setNavState] = useState<boolean>(false)
@@ -68,7 +69,19 @@ export default function Navbar() {
 					<Links links={links} />
 				</section>
 				<section className={styles.right}>
-					{userData?.profile_image ? (
+					{userData?.id ? (
+						<Link href="/admin/my-profile">
+							<IconContext.Provider
+								value={{
+									className: styles.signInIcon,
+									color: "#fff",
+									size: "48px",
+								}}
+							>
+								<PiUserCircleLight />
+							</IconContext.Provider>
+						</Link>
+					) : userData?.profile_image ? (
 						<Link href="/admin/my-profile">
 							<Image
 								className={styles.userProfileImage}
