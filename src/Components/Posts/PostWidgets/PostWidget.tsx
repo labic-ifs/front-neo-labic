@@ -25,6 +25,7 @@ type PostWidgetProps = {
 		first_name?: string
 		last_name?: string
 		profile_image?: string
+		slug?: string
 	}
 	isReduced?: boolean
 }
@@ -41,7 +42,7 @@ export default function PostWidget({ markdownItem, isReduced }: PostWidgetProps)
 		<div
 			className={`${styles.container} ${styles.normalWidgetContainer}`}
 			onClick={() => {
-				router.push(`/articles/${markdownItem.id}`)
+				router.push(`/articles/${markdownItem.slug}`)
 			}}
 		>
 			<div className={styles.postCoverContainer}>

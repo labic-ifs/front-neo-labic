@@ -11,15 +11,30 @@ import { usePathname, useRouter } from "next/navigation"
 import { ChangeEvent, useEffect, useState } from "react"
 import { parseCookies } from "nookies"
 import { useFormState } from "react-dom"
+import { ToggleSwitch } from "@/Components/Forms/ToggleSwitch"
+const metadataParser = require("markdown-yaml-metadata-parser")
 
 type EditPostWidgetProps = {
-	markdownBody: { id: string; body: string; user_id: string; created_at: Date }
+	markdownBody: {
+		id: string
+		body: string
+		user_id: string
+		created_at: Date
+		is_published: number
+	}
+}
+
+type FormDataTypes = {
+	isPublished?: boolean
 }
 
 export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 	const router = useRouter()
 	const path = usePathname()
 	const [textBody, setTextBody] = useState<string>(markdownBody.body)
+	const [formData, setFormData] = useState<FormDataTypes>({
+		isPublished: Boolean(markdownBody.is_published),
+	})
 	const [state, formAction] = useFormState(updatePost, undefined)
 
 	useEffect(() => {
@@ -35,8 +50,17 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 		setTextBody(event.target.value)
 	}
 
+	const getValue = (event: ChangeEvent<HTMLInputElement>) => {
+		setFormData((prevData) => ({
+			...prevData,
+			[event.target.name]: event.target.checked,
+		}))
+	}
+
 	async function updatePost() {
 		const { labicToken: token } = parseCookies()
+
+		const { metadata } = metadataParser(textBody)
 
 		if (token) {
 			try {
@@ -48,7 +72,11 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 							"Content-Type": "application/json",
 							Authorization: `Bearer ${token}`,
 						},
-						body: JSON.stringify({ body: textBody }),
+						body: JSON.stringify({
+							isPublished: formData.isPublished,
+							body: textBody,
+							slug: metadata.title ? metadata.title : "untitled",
+						}),
 					}
 				)
 
@@ -83,6 +111,19 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 					<Error text="Não foi possível salvar seu post." />
 				)}
 				{state?.error === "Something went wrong." && <Error text="Algo deu errado." />}
+				<div className={styles.postOptionsContainer}>
+					<div className={styles.postOption}>
+						<p>Publicado:</p>
+						<ToggleSwitch.Root htmlFor="isPublished">
+							<ToggleSwitch.Tag
+								id="isPublished"
+								name="isPublished"
+								isChecked={markdownBody.is_published ? true : false}
+								getValue={getValue}
+							/>
+						</ToggleSwitch.Root>
+					</div>
+				</div>
 				<div className={styles.editPreviewAreasContainer}>
 					<div className={styles.editPreviewArea}>
 						<p>Código</p>

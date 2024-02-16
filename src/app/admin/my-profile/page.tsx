@@ -28,7 +28,13 @@ const getMyArticles = async () => {
 }
 
 type MyArticlesTypes = {
-	articles: { id: string; body: string; user_id: string; created_at: Date }[]
+	articles: {
+		id: string
+		body: string
+		user_id: string
+		created_at: Date
+		is_published: boolean
+	}[]
 }
 
 export default async function MyProfile() {

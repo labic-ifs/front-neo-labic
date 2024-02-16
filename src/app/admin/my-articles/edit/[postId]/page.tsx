@@ -11,7 +11,7 @@ const getPost = async (postId: string) => {
 	const post = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getPost/${postId}`, {
 		cache: "no-store",
 	}).then((res) => res.json())
-	console.log(post)
+
 	return post.post
 }
 

@@ -16,6 +16,7 @@ export default function CreatePostButton() {
 		const form = new FormData()
 		form.append("user_id", userData?.id!)
 		form.append("body", "---\ntitle: \ndescription: \ncover: \n---\n")
+		form.append("slug", "untitled")
 
 		const { postId } = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/createPost/`, {
 			method: "POST",
