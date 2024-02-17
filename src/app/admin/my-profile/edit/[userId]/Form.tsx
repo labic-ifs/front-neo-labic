@@ -105,6 +105,10 @@ export default function EditMyProfileForm() {
 			await imageSchema.validate(formData, { abortEarly: false })
 			await formSchema.validate(formData, { abortEarly: false })
 
+			if (formData.username?.includes(" ")) {
+				return "Nome de usuário não deve conter espaços em branco."
+			}
+
 			const finalForm = new FormData()
 			finalForm.append("email", formData?.email!)
 			finalForm.append("firstName", formData?.firstName!)
@@ -222,6 +226,14 @@ export default function EditMyProfileForm() {
 							</Input.Root>
 							{state?.includes("O nome de usuário é obrigatório.") && (
 								<Error text="O nome de usuário é obrigatório." fieldError />
+							)}
+							{state?.includes(
+								"Nome de usuário não deve conter espaços em branco."
+							) && (
+								<Error
+									text="Nome de usuário não deve conter espaços em branco."
+									fieldError
+								/>
 							)}
 							{state?.includes(
 								"Nome de usuário deve ter no mínimo 3 caracteres."

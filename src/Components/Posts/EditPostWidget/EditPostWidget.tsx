@@ -75,7 +75,7 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 						body: JSON.stringify({
 							isPublished: formData.isPublished,
 							body: textBody,
-							slug: metadata.title ? metadata.title : "untitled",
+							slug: metadata.title ? metadata.title.replace(/ /g, "-") : "untitled",
 						}),
 					}
 				)
@@ -83,6 +83,7 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 				if (payload.ok) {
 					revalidatePaths(path)
 					revalidatePaths("/admin/my-articles")
+					revalidatePaths("/articles")
 					router.back()
 				} else {
 					return { error: "It was not possible to save your post." }

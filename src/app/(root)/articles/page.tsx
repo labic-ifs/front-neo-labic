@@ -9,9 +9,9 @@ export const metadata = {
 }
 
 const getArticles = async () => {
-	const articles = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getAllArticles/`
-	).then((res) => res.json())
+	const articles = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getAllArticles/`, {
+		cache: "no-store",
+	}).then((res) => res.json())
 
 	console.log(articles)
 
