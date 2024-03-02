@@ -44,8 +44,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 		async function recoverUserData() {
 			const { labicToken: token } = parseCookies()
 
-			console.log(token)
-
 			if (token && !userData) {
 				const user = await fetch(
 					`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/recoverUser/`,
@@ -56,8 +54,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 						},
 					}
 				).then((res) => res.json())
-
-				console.log(user)
 
 				setUserData(user)
 			}

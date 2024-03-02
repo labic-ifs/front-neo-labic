@@ -13,8 +13,6 @@ const getArticles = async () => {
 		cache: "no-store",
 	}).then((res) => res.json())
 
-	console.log(articles)
-
 	return { articles: articles.reverse() }
 }
 

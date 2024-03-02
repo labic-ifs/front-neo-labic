@@ -8,8 +8,6 @@ import Image from "next/image"
 import moment from "moment"
 import "moment/locale/pt-br"
 
-import Link from "next/link"
-
 import { useRouter } from "next/navigation"
 import { PiUserCircleLight } from "react-icons/pi"
 import { IconContext } from "react-icons"
@@ -35,8 +33,6 @@ export default function PostWidget({ markdownItem, isReduced }: PostWidgetProps)
 	const postDate = moment(markdownItem.created_at).locale("pt-br").format("DD [de] MMMM, YYYY")
 
 	const router = useRouter()
-
-	console.log(markdownItem)
 
 	return (
 		<div

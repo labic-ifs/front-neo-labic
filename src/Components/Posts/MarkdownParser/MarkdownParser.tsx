@@ -16,9 +16,10 @@ const metadataParser = require("markdown-yaml-metadata-parser")
 
 type MarkdownParserProps = {
 	markdownBody: string
+	noHeader?: boolean
 }
 
-export default function MarkdownParser({ markdownBody }: MarkdownParserProps) {
+export default function MarkdownParser({ markdownBody, noHeader }: MarkdownParserProps) {
 	const data = () => {
 		try {
 			const { content, metadata } = metadataParser(markdownBody)
@@ -33,24 +34,28 @@ export default function MarkdownParser({ markdownBody }: MarkdownParserProps) {
 
 	return (
 		<div>
-			{metadata?.title ? (
-				<h1 className={styles.title}>{metadata?.title}</h1>
-			) : (
-				<h1 className={styles.title}>Sem Título</h1>
-			)}
-			{metadata?.description ? (
-				<p className={styles.description}>{metadata?.description}</p>
-			) : (
-				<p className={styles.description}>Descrição não inserida.</p>
-			)}
-			{metadata?.cover && (
-				<Image
-					className={styles.cover}
-					src={metadata?.cover}
-					alt="image"
-					width={1280}
-					height={720}
-				></Image>
+			{noHeader ? null : (
+				<>
+					{metadata?.title ? (
+						<h1 className={styles.title}>{metadata?.title}</h1>
+					) : (
+						<h1 className={styles.title}>Sem Título</h1>
+					)}
+					{metadata?.description ? (
+						<p className={styles.description}>{metadata?.description}</p>
+					) : (
+						<p className={styles.description}>Descrição não inserida.</p>
+					)}
+					{metadata?.cover && (
+						<Image
+							className={styles.cover}
+							src={metadata?.cover}
+							alt="image"
+							width={1280}
+							height={720}
+						></Image>
+					)}
+				</>
 			)}
 			<div className={"markdown-body"}>
 				<Markdown
