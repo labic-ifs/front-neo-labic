@@ -69,8 +69,8 @@ export default function Navbar() {
 					<Links links={links} />
 				</section>
 				<section className={styles.right}>
-					{userData?.id ? (
-						<Link href="/admin/my-profile">
+					{!userData?.id ? (
+						<Link href="/sign-in">
 							<IconContext.Provider
 								value={{
 									className: styles.signInIcon,
@@ -78,7 +78,7 @@ export default function Navbar() {
 									size: "48px",
 								}}
 							>
-								<PiUserCircleLight />
+								<PiUserCirclePlusLight />
 							</IconContext.Provider>
 						</Link>
 					) : userData?.profile_image ? (
@@ -92,7 +92,7 @@ export default function Navbar() {
 							/>
 						</Link>
 					) : (
-						<Link href="/sign-in">
+						<Link href="/admin/my-profile">
 							<IconContext.Provider
 								value={{
 									className: styles.signInIcon,
@@ -100,7 +100,7 @@ export default function Navbar() {
 									size: "48px",
 								}}
 							>
-								<PiUserCirclePlusLight />
+								<PiUserCircleLight />
 							</IconContext.Provider>
 						</Link>
 					)}

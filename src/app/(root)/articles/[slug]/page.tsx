@@ -10,8 +10,10 @@ import { PiUserCircleLight } from "react-icons/pi"
 
 const metadataParser = require("markdown-yaml-metadata-parser")
 
-export const metadata = {
-	title: "Artigos",
+export async function generateMetadata({ params }: any) {
+	return {
+		title: params.slug.charAt(5).toUpperCase() + params.slug.slice(6).replace("-", " "),
+	}
 }
 
 const getArticle = async (slug: string) => {
@@ -49,11 +51,8 @@ export default async function SpecificArticle({ params }: any) {
 	const slug = params.slug
 	const { article }: MyArticleTypes = await getArticle(slug)
 
-	const { metadata, body } = metadataParser(article.post.body)
-	console.log(metadata)
+	const { metadata } = metadataParser(article.post.body)
 	const postDate = moment(article.post.created_at).locale("pt-br").format("DD [de] MMMM, YYYY")
-
-	console.log(article)
 
 	return (
 		<div className={styles.outerContainer}>
