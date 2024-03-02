@@ -30,7 +30,6 @@ type FormDataTypes = {
 
 export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 	const router = useRouter()
-	const path = usePathname()
 	const [textBody, setTextBody] = useState<string>(markdownBody.body)
 	const [formData, setFormData] = useState<FormDataTypes>({
 		isPublished: Boolean(markdownBody.is_published),
@@ -81,7 +80,6 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 				)
 
 				if (payload.ok) {
-					revalidatePaths(path)
 					revalidatePaths("/admin/my-articles")
 					revalidatePaths("/articles")
 					router.back()

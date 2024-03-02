@@ -41,10 +41,12 @@ export default async function MyArticles() {
 					<h1>Meus Artigos</h1>
 					<CreatePostButton></CreatePostButton>
 				</div>
+				{/*
 				<Input.Root>
 					<Input.Icon serverSide serverSideIconType="search" />
 					<Input.Tag name="search" placeholder="Robô para OBR" />
 				</Input.Root>
+				*/}
 				{articles?.map((item) => {
 					return <AdminPostWidget key={item.id} markdownItem={item} />
 				})}

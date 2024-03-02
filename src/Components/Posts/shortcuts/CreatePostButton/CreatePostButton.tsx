@@ -6,7 +6,11 @@ import { useContext } from "react"
 import { AuthContext } from "@/contexts/AuthContext"
 import { useRouter } from "next/navigation"
 
-export default function CreatePostButton() {
+type CreatePostButtonTypes = {
+	fullWidth?: boolean
+}
+
+export default function CreatePostButton({ fullWidth }: CreatePostButtonTypes) {
 	const { userData } = useContext(AuthContext)
 	const router = useRouter()
 
@@ -31,8 +35,16 @@ export default function CreatePostButton() {
 		router.push(`/admin/my-articles/edit/${postId}`)
 	}
 	return (
-		<Button.Root onClick={createArticle}>
-			<Button.Text text="Criar" />
-		</Button.Root>
+		<>
+			{fullWidth ? (
+				<Button.Root fullWidth onClick={createArticle}>
+					<Button.Text text="Criar" />
+				</Button.Root>
+			) : (
+				<Button.Root onClick={createArticle}>
+					<Button.Text text="Criar" />
+				</Button.Root>
+			)}
+		</>
 	)
 }

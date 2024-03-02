@@ -5,6 +5,7 @@ import MyProfileWidget from "./MyProfileWidget"
 import AdminPostWidget from "@/Components/Posts/PostWidgets/AdminPostWidget"
 import Link from "next/link"
 import Image from "next/image"
+import CreatePostButton from "@/Components/Posts/shortcuts/CreatePostButton/CreatePostButton"
 import { Button } from "@/Components/Buttons/Button"
 
 export const metadata = {
@@ -40,41 +41,67 @@ type MyArticlesTypes = {
 export default async function MyProfile() {
 	const { articles }: MyArticlesTypes = await getMyArticles()
 
+	console.log(articles)
+
 	return (
 		<main className={styles.container}>
 			<MyProfileWidget />
 			<section className={styles.areasContainer}>
 				<section className={styles.sectionContainer}>
 					<h1>Inbox</h1>
-					<div className={styles.underDevelopmentWarnContainer}>
-						<div className={styles.underDevelopmentWarnWrapper}>
+					<div className={styles.centerImageWarnContainer}>
+						<div className={styles.centerImageWarnWrapper}>
 							<Image
-								className={styles.underDevelopmentImage}
+								className={styles.centerImage}
 								src={"/dev/under-development-illustration.svg"}
 								alt="under development illustration"
 								width={500}
 								height={350}
 							></Image>
-							<p className={styles.underDevelopmentWarn}>Em Desenvolvimento</p>
+							<p className={styles.centerImageWarn}>Em Desenvolvimento</p>
 						</div>
 					</div>
 				</section>
 				<section className={styles.sectionContainer}>
-					<h1>Meus Artigos</h1>
-					{articles.map((item) => {
-						return (
-							<AdminPostWidget
-								markdownItem={item}
-								key={item.id}
-								isReduced
-							></AdminPostWidget>
-						)
-					})}
-					<Link className={styles.seeAllArticles} href={"/admin/my-articles"}>
-						<Button.Root fullWidth>
-							<Button.Text text="Ver Todos" />
-						</Button.Root>
-					</Link>
+					{articles.length !== 0 ? (
+						<>
+							<div className={styles.articlesSectionContainer}>
+								<h1>Meus Artigos</h1>
+								{articles.map((item) => {
+									return (
+										<AdminPostWidget
+											markdownItem={item}
+											key={item.id}
+											isReduced
+										></AdminPostWidget>
+									)
+								})}
+							</div>
+							<Link className={styles.seeAllArticles} href={"/admin/my-articles"}>
+								<Button.Root fullWidth>
+									<Button.Text text="Ver Todos" />
+								</Button.Root>
+							</Link>
+						</>
+					) : (
+						<>
+							<h1>Meus Artigos</h1>
+							<div className={styles.centerImageWarnContainer}>
+								<div className={styles.centerImageWarnWrapper}>
+									<Image
+										className={styles.centerImageNoArticles}
+										src={"/utils/no-articles-found.svg"}
+										alt="nothing here"
+										width={200}
+										height={100}
+									></Image>
+								</div>
+							</div>
+							<div className={styles.createPostButton}>
+								<CreatePostButton fullWidth />
+							</div>
+						</>
+					)}
 				</section>
 			</section>
 		</main>

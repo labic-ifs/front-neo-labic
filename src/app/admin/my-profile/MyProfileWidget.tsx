@@ -71,14 +71,6 @@ export default function MyProfileWidget() {
 								<p className={styles.boldText}>Email:</p>
 								<p>{userData?.email}</p>
 							</div>
-							<div className={styles.otherInfoArea}>
-								<p className={styles.boldText}>Github:</p>
-								<p>Em Desenvolvimento</p>
-							</div>
-							<div className={styles.otherInfoArea}>
-								<p className={styles.boldText}>Instagram:</p>
-								<p>Em Desenvolvimento</p>
-							</div>
 						</div>
 						<div></div>
 					</div>
