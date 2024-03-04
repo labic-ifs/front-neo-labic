@@ -41,8 +41,6 @@ type MyArticlesTypes = {
 export default async function MyProfile() {
 	const { articles }: MyArticlesTypes = await getMyArticles()
 
-	console.log(articles)
-
 	return (
 		<main className={styles.container}>
 			<MyProfileWidget />

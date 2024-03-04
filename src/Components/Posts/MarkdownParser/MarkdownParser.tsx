@@ -46,11 +46,19 @@ export default function MarkdownParser({ markdownBody, noHeader }: MarkdownParse
 					) : (
 						<p className={styles.description}>Descrição não inserida.</p>
 					)}
-					{metadata?.cover && (
+					{metadata?.cover ? (
 						<Image
 							className={styles.cover}
 							src={metadata?.cover}
-							alt="image"
+							alt="post image"
+							width={1280}
+							height={720}
+						></Image>
+					) : (
+						<Image
+							className={styles.cover}
+							src={"/posts/blank-post.png"}
+							alt="post image"
 							width={1280}
 							height={720}
 						></Image>

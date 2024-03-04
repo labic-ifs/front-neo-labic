@@ -112,7 +112,7 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 				{state?.error === "Something went wrong." && <Error text="Algo deu errado." />}
 				<div className={styles.postOptionsContainer}>
 					<div className={styles.postOption}>
-						<p>Publicado:</p>
+						<p>Publicado</p>
 						<ToggleSwitch.Root htmlFor="isPublished">
 							<ToggleSwitch.Tag
 								id="isPublished"
