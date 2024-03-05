@@ -2,7 +2,7 @@
 
 import React, { createContext, useEffect, useState } from "react"
 import { setCookie, parseCookies } from "nookies"
-//	import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 type UserType = {
 	id: string
@@ -32,7 +32,7 @@ type AuthContext = {
 export const AuthContext = createContext({} as AuthContext)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-	//	const router = useRouter()
+	const router = useRouter()
 
 	const [userData, setUserData] = useState<UserType | null>(null)
 
@@ -81,7 +81,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 			setUserData(user)
 
-			//	router.push("/admin/my-profile")
+			router.push("/admin/my-profile")
 
 			return success
 		} else {

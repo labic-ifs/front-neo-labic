@@ -79,7 +79,7 @@ export default function PostWidget({ markdownItem, isReduced }: PostWidgetProps)
 						<div className={styles.authorContainer}>
 							<Image
 								className={styles.authorImage}
-								src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${markdownItem.user_id}`}
+								src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${markdownItem.profile_image}`}
 								width={24}
 								height={24}
 								alt="Profile Image"

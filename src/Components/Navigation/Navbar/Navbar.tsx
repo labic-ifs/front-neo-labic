@@ -139,7 +139,7 @@ export default function Navbar() {
 								<Image
 									id="user-profile-image"
 									className={styles.userProfileImage}
-									src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
+									src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.profile_image}`}
 									alt="profile image"
 									width={48}
 									height={48}

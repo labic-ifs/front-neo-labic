@@ -19,7 +19,7 @@ export default function MyProfileWidget() {
 					{userData?.profile_image ? (
 						<Image
 							className={styles.profileImage}
-							src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.id}`}
+							src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${userData?.profile_image}`}
 							alt="profile image"
 							width={512}
 							height={512}

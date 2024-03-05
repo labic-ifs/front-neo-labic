@@ -25,6 +25,8 @@ const getMyArticles = async () => {
 		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getUserArticles/${user.id}`
 	).then((res) => res.json())
 
+	console.log(articles)
+
 	return { articles: articles[0].posts?.reverse().slice(0, 3) }
 }
 

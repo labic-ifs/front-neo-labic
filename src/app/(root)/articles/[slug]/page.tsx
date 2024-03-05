@@ -71,7 +71,7 @@ export default async function SpecificArticle({ params }: any) {
 								<div className={styles.authorContainer}>
 									<Image
 										className={styles.authorImage}
-										src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${article.post.user_id}`}
+										src={`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/getUserProfileImage/${article.user[0].profile_image}`}
 										width={24}
 										height={24}
 										alt="Profile Image"

@@ -43,8 +43,6 @@ export default function SignInForm() {
 
 			const trySignIn = await signIn(formData)
 
-			router.push("/admin/my-profile")
-
 			return trySignIn
 		} catch (err: any) {
 			return err.errors
