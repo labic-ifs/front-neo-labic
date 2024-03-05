@@ -1,10 +1,11 @@
 import styles from "./MyArticles.module.css"
 
-import MyArticlesList from "./MyArticlesList"
+import AdminPostWidget from "@/Components/Posts/PostWidgets/AdminPostWidget"
 
-import { useContext } from "react"
-import { AuthContext } from "@/contexts/AuthContext"
-import { cookies, headers } from "next/headers"
+import { Input } from "@/Components/Forms/Input"
+import CreatePostButton from "@/Components/Posts/shortcuts/CreatePostButton/CreatePostButton"
+
+import { cookies } from "next/headers"
 
 export const metadata = {
 	title: "Meus Artigos",
@@ -20,18 +21,36 @@ const getMyArticles = async () => {
 	}).then((res) => res.json())
 
 	const articles = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_HOST}articles/getUserArticles/${user.id}`
+		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getUserArticles/${user.id}`
 	).then((res) => res.json())
 
-	return articles[0].articles.reverse()
+	return { articles: articles[0].posts?.reverse() }
+}
+
+type MyArticlesTypes = {
+	articles: { id: string; body: string; user_id: string; created_at: Date }[]
 }
 
 export default async function MyArticles() {
-	const articles = await getMyArticles()
+	const { articles }: MyArticlesTypes = await getMyArticles()
 
 	return (
 		<main className={styles.container}>
-			<MyArticlesList articles={articles} />
+			<section className={styles.listContainer}>
+				<div className={styles.headerContainer}>
+					<h1>Meus Artigos</h1>
+					<CreatePostButton></CreatePostButton>
+				</div>
+				{/*
+				<Input.Root>
+					<Input.Icon serverSide serverSideIconType="search" />
+					<Input.Tag name="search" placeholder="Robô para OBR" />
+				</Input.Root>
+				*/}
+				{articles?.map((item) => {
+					return <AdminPostWidget key={item.id} markdownItem={item} />
+				})}
+			</section>
 		</main>
 	)
 }

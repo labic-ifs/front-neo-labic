@@ -2,6 +2,91 @@
 	margin: 2rem 2rem 2rem calc(2rem + 67px);
 }
 
+.areasContainer {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1.5rem;
+	gap: 1.5rem;
+}
+
+.sectionContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-grow: 1;
+	max-width: 50%;
+	gap: 1rem;
+	background: var(--primary-gradient);
+	border-radius: 1rem;
+	padding: 1.25rem 1.75rem;
+	position: relative;
+}
+
+.sectionContainer::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 1rem;
+	padding: 3px;
+	background: var(--border-gradient);
+	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	z-index: -1;
+}
+
+.articlesSectionContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.seeAllArticles {
+	text-decoration: none;
+}
+
+.centerImageWarnContainer {
+	height: 100%;
+	display: grid;
+	place-items: center;
+	padding: 2rem 0;
+}
+
+.centerImageWarnWrapper {
+	display: grid;
+	place-items: center;
+	gap: 1rem;
+}
+
+.centerImageWarn {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.centerImage {
+	width: 80%;
+	height: auto;
+}
+
+.centerImageNoArticles {
+	width: 40%;
+	height: auto;
+}
+
+.createPostButton {
+	width: 100%;
+}
+
+@media (max-width: 1200px) {
+	.areasContainer {
+		flex-direction: column;
+	}
+
+	.sectionContainer {
+		max-width: 100%;
+	}
+}
+
 @media (max-width: 768px) {
 	.container {
 		margin: 1rem 1rem 1rem 1rem;

@@ -1,26 +1,6 @@
 .container {
 	width: 100%;
 	height: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	background: var(--primary-gradient);
-	border-radius: 1rem;
-	padding: 1.25rem;
-	position: relative;
-}
-
-.container::before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	border-radius: 1rem;
-	padding: 3px;
-	background: var(--border-gradient);
-	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-	-webkit-mask-composite: xor;
-	mask-composite: exclude;
-	z-index: -1;
 }
 
 .titleContainer {
@@ -35,7 +15,7 @@
 .editPreviewAreasContainer {
 	display: flex;
 	gap: 1rem;
-	height: calc(100% - 128px);
+	height: 80vh;
 }
 
 .editPreviewArea {
@@ -84,6 +64,41 @@
 
 .form {
 	height: 100%;
+}
+
+.postOptionsContainer {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	background: var(--primary-gradient);
+	border-radius: 1rem;
+	padding: 12px;
+	margin: 12px 0;
+	position: relative;
+	max-width: 256px;
+}
+
+.postOptionsContainer::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 1rem;
+	padding: 3px;
+	background: var(--border-gradient);
+	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	z-index: -1;
+}
+
+.postOption {
+	display: flex;
+	width: 100%;
+	gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
 }
 
 @media (max-width: 1024px) {

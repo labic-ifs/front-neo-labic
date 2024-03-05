@@ -1,0 +1,93 @@
+.outerContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.container {
+	max-width: 1540px;
+	width: 100%;
+	padding: 3rem 2rem 2rem 2rem;
+}
+
+.infoContainer {
+	margin-bottom: 1rem;
+}
+
+.infoWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.postCover {
+	object-fit: cover;
+	border-radius: 1rem;
+	height: auto;
+	width: 100%;
+}
+
+.titleContainer {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.title {
+	font-size: 34px;
+}
+
+.description {
+	overflow: hidden;
+	margin: 0.75rem 0 1rem 0;
+	width: 100%;
+	height: auto;
+	text-overflow: ellipsis;
+	font-size: 16px;
+}
+
+.authorContainer {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	margin-top: 6px;
+}
+
+.authorImage {
+	border-radius: 100%;
+}
+
+.authorName {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.date {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.markdownBody {
+	margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+	.container {
+		flex-direction: column;
+	}
+
+	.postCoverContainer {
+		height: 50vw;
+		width: 100%;
+	}
+
+	.titleContainer {
+		flex-direction: column;
+	}
+
+	.description {
+		margin: 1rem 0;
+	}
+}

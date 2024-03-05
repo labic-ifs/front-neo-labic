@@ -1,6 +1,6 @@
 import Image from "next/image"
 import styles from "./SignIn.module.css"
-import Form from "./Form"
+import SignInForm from "./Form"
 
 export const metadata = {
 	title: "Sign-in",
@@ -23,7 +23,7 @@ export default function SignIn() {
 				width={1920}
 				height={1048}
 			/>
-			<Form />
+			<SignInForm />
 		</main>
 	)
 }

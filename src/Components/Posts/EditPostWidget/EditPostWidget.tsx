@@ -1,28 +1,40 @@
 "use client"
 
-import styles from "./EditArticleWidget.module.css"
+import styles from "./EditPostWidget.module.css"
 
 import MarkdownParser from "@/Components/Posts/MarkdownParser/MarkdownParser"
 import Error from "@/Components/Forms/Error/Error"
-import { revalidatePathAfterSendAticle } from "@/lib/actions"
+import { revalidatePaths } from "@/lib/actions"
 
-import { MinimalButton } from "@/Components/Buttons/MinimalButton"
 import { Button } from "@/Components/Buttons/Button"
-import { FaArrowLeft } from "react-icons/fa"
 import { usePathname, useRouter } from "next/navigation"
 import { ChangeEvent, useEffect, useState } from "react"
 import { parseCookies } from "nookies"
 import { useFormState } from "react-dom"
+import { ToggleSwitch } from "@/Components/Forms/ToggleSwitch"
+const metadataParser = require("markdown-yaml-metadata-parser")
 
-type EditArticleWidgetProps = {
-	markdownBody: { id: string; body: string; user_id: string; created_at: Date }
+type EditPostWidgetProps = {
+	markdownBody: {
+		id: string
+		body: string
+		user_id: string
+		created_at: Date
+		is_published: number
+	}
 }
 
-export default function EditArticleWidget({ markdownBody }: EditArticleWidgetProps) {
+type FormDataTypes = {
+	isPublished?: boolean
+}
+
+export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 	const router = useRouter()
-	const path = usePathname()
 	const [textBody, setTextBody] = useState<string>(markdownBody.body)
-	const [state, formAction] = useFormState(updateArticle, undefined)
+	const [formData, setFormData] = useState<FormDataTypes>({
+		isPublished: Boolean(markdownBody.is_published),
+	})
+	const [state, formAction] = useFormState(updatePost, undefined)
 
 	useEffect(() => {
 		const textAreaElement: HTMLTextAreaElement | null = document.querySelector("#textarea")
@@ -37,31 +49,44 @@ export default function EditArticleWidget({ markdownBody }: EditArticleWidgetPro
 		setTextBody(event.target.value)
 	}
 
-	async function updateArticle() {
+	const getValue = (event: ChangeEvent<HTMLInputElement>) => {
+		setFormData((prevData) => ({
+			...prevData,
+			[event.target.name]: event.target.checked,
+		}))
+	}
+
+	async function updatePost() {
 		const { labicToken: token } = parseCookies()
+
+		const { metadata } = metadataParser(textBody)
 
 		if (token) {
 			try {
 				const payload = await fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_HOST}articles/updateArticle/${markdownBody.id}`,
+					`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/updatePost/${markdownBody.id}`,
 					{
 						method: "PUT",
 						headers: {
 							"Content-Type": "application/json",
 							Authorization: `Bearer ${token}`,
 						},
-						body: JSON.stringify({ body: textBody }),
+						body: JSON.stringify({
+							isPublished: formData.isPublished,
+							body: textBody,
+							slug: metadata.title ? metadata.title.replace(/ /g, "-") : "untitled",
+						}),
 					}
 				)
 
 				if (payload.ok) {
-					revalidatePathAfterSendAticle(path)
-					router.push("/admin/my-articles/")
+					revalidatePaths("/admin/my-articles")
+					revalidatePaths("/articles")
+					router.back()
 				} else {
-					return { error: "Something went wrong." }
+					return { error: "It was not possible to save your post." }
 				}
 			} catch (err) {
-				console.log(err)
 				return { error: "Something went wrong." }
 			}
 		} else {
@@ -71,15 +96,9 @@ export default function EditArticleWidget({ markdownBody }: EditArticleWidgetPro
 
 	return (
 		<section className={styles.container}>
-			<div>
-				<MinimalButton.Root onClick={() => router.push("/admin/my-articles")}>
-					<MinimalButton.Icon icon={FaArrowLeft} />
-					<MinimalButton.Text text="voltar" />
-				</MinimalButton.Root>
-			</div>
 			<form className={styles.form} action={formAction}>
 				<div className={styles.titleContainer}>
-					<h1 className={styles.title}>Edite seu Artigo</h1>
+					<h1 className={styles.title}>Edite seu Post</h1>
 					<Button.Root>
 						<Button.Text text="salvar" />
 					</Button.Root>
@@ -87,7 +106,23 @@ export default function EditArticleWidget({ markdownBody }: EditArticleWidgetPro
 				{state?.error === "User not authenticated." && (
 					<Error text="Usuário não authenticado." />
 				)}
+				{state?.error === "It was not possible to save your post." && (
+					<Error text="Não foi possível salvar seu post." />
+				)}
 				{state?.error === "Something went wrong." && <Error text="Algo deu errado." />}
+				<div className={styles.postOptionsContainer}>
+					<div className={styles.postOption}>
+						<p>Publicado</p>
+						<ToggleSwitch.Root htmlFor="isPublished">
+							<ToggleSwitch.Tag
+								id="isPublished"
+								name="isPublished"
+								isChecked={markdownBody.is_published ? true : false}
+								getValue={getValue}
+							/>
+						</ToggleSwitch.Root>
+					</div>
+				</div>
 				<div className={styles.editPreviewAreasContainer}>
 					<div className={styles.editPreviewArea}>
 						<p>Código</p>

@@ -6,12 +6,8 @@
 	--primary-bg: #17171b;
 	--accent-bg: #242427;
 	--soft-bg: #a1a6b2;
-	--primary-gradient: linear-gradient(
-		315deg,
-		rgba(36, 36, 39, 0.15) 0%,
-		rgba(36, 36, 39, 1) 100%
-	);
-	--border-gradient: linear-gradient(135deg, rgba(36, 36, 39, 0.15) 0%, rgba(36, 36, 39, 1) 100%);
+	--primary-gradient: linear-gradient(315deg, rgba(36, 36, 39, 0.5) 0%, rgba(36, 36, 39, 1) 100%);
+	--border-gradient: linear-gradient(135deg, rgba(36, 36, 39, 0.5) 0%, rgba(36, 36, 39, 1) 100%);
 }
 
 * {

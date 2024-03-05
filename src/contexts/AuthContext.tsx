@@ -8,13 +8,14 @@ type UserType = {
 	id: string
 	profile_image?: string
 	email: string
-	name: string
-	surname: string
+	first_name: string
+	last_name: string
 	username?: string
 	course?: string
 	occupation_area?: string
 	description?: string
 	is_superuser?: boolean
+	is_active?: boolean
 }
 
 type SignInData = {
@@ -60,6 +61,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	})
 
 	async function signIn({ key, password }: SignInData) {
+		if (!key && !password) {
+			setUserData(null)
+		}
+
 		const { token, user, success, error } = await fetch(
 			`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/authenticateUser/`,
 			{

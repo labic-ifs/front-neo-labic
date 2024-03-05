@@ -49,6 +49,7 @@
 	width: 196px;
 	height: 196px;
 	border-radius: 12px;
+	object-fit: cover;
 }
 
 .title {

@@ -12,23 +12,26 @@ import { AuthContext } from "@/contexts/AuthContext"
 import { useFormState } from "react-dom"
 import { ChangeEvent, useContext, useState } from "react"
 import { object, string } from "yup"
+import { useRouter } from "next/navigation"
 
 type formTypes = {
 	key?: string
 	password?: string
 }
 
-let formSchema = object({
+const formSchema = object({
 	key: string().required("O e-mail ou usuário é obrigatório!"),
 	password: string()
 		.min(8, "A senha deve ter no mínimo 8 caracteres.")
 		.required("A senha é obrigatória!"),
 })
 
-export default function Form() {
+export default function SignInForm() {
 	const [formData, setFormData] = useState<formTypes>({})
 	const [state, formAction] = useFormState(handleSubmit, undefined)
 	const { signIn } = useContext(AuthContext)
+
+	const router = useRouter()
 
 	const getValue = (event: ChangeEvent<HTMLInputElement>) => {
 		setFormData((prevData) => ({ ...prevData, [event.target.name]: event.target.value }))
