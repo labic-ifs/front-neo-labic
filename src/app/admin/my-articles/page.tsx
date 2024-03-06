@@ -21,7 +21,12 @@ const getMyArticles = async () => {
 	}).then((res) => res.json())
 
 	const articles = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getUserArticles/${user.id}`
+		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getUserArticles/${user.id}`,
+		{
+			headers: {
+				Authorization: `Bearer ${token?.value}`,
+			},
+		}
 	).then((res) => res.json())
 
 	return { articles: articles[0].posts?.reverse() }
