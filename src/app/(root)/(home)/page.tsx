@@ -7,6 +7,7 @@ import { AuthContext } from "@/contexts/AuthContext"
 import { useContext } from "react"
 import { PiUserCirclePlusLight } from "react-icons/pi"
 import HomeHero from "./HomeHero"
+import AreasOfExpertise from "./AreasOfExpertise"
 
 export const metadata = {
 	title: "Início",
@@ -15,8 +16,8 @@ export const metadata = {
 export default function Home() {
 	return (
 		<main className={styles.container}>
-			<HomeHero></HomeHero>
-			<section>next</section>
+			<HomeHero />
+      <AreasOfExpertise />
 		</main>
 	)
 }
