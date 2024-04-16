@@ -1,45 +1,46 @@
-"use client"
+import styles from "./Members.module.css"
 
-import React, {useEffect, useState} from 'react'
-import Style from "@/app/(root)/members/members.module.css"
+import { cookies } from "next/headers"
 
-import { Button } from "@/Components/Buttons/Button"
+export const metadata = {
+	title: "Membros",
+}
 
-export default function Members(){
-    const [username, setUsername] = useState()
-    const [first_name, setFirts_name] = useState()
-    const [last_name, setLast_name] = useState()
-    const [occupation_area, setOccupation_area] = useState()
+const getMembers = async () => {
+	const members = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getAllMemberss/`, {
+		cache: "no-store",
+	}).then((res) => res.json())
 
-    useEffect(() => {
-      fetch("http://localhost:1080").then(
-        response => response.json()).then(
-          data => {
-            console.log(data)
-            setUsername(data.username)
-            setFirts_name(data.first_name)
-            setLast_name(data.last_name)
-            setOccupation_area(data.occupation_area)
-          }
-        )
-      }, []);
-      
-    
-    return(
-        <main className={Style.main}>
-            <h1>Conheça Nossos Membros!</h1>
-            <div className={Style.users}>
-                <div className={Style.user}>
-                    <p>{first_name} {last_name}</p>
-                    <p>{occupation_area}</p>
+	return { members: members.reverse() }
+}
 
-                    <div className={Style.line}></div>
+type MembersTypes = {
+	articles: {
+		id: string
+		body: string
+		user_id: string
+		created_at: Date
+		username?: string
+		first_name?: string
+		last_name?: string
+		profile_image?: string
+		slug?: string
+	}[]
+}
 
-                    <Button.Root fullWidth>
-					    <Button.Text text="Quero Conhecer!" />
-				    </Button.Root>
-                </div>
+
+export default async function Members() {
+    const { members }: MembersTypes = await getMembers()
+	return (
+		<div className={styles.container}>
+			<h1>Conheça Nossos Membros!</h1>
+			<div className={styles.members}>
+                {members.map((item) => {
+				    return <div className={styles.member}>
+                        <p> {(item)} </p>
+                    </div>
+			    })}
             </div>
-        </main>
-    )
+		</div>
+	)
 }

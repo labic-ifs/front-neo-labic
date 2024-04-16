@@ -1,19 +1,16 @@
-.main{
+.container{
     text-align: center;
 }
-.users{
+.members{
     display: flex;
     justify-content: space-around;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.users .user{
+.members .member{
     margin-top: 5%;
     width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.users .user .line{
-    border-bottom: 2px solid #fff;
 }
