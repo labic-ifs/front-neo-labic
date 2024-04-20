@@ -1,5 +1,4 @@
 import styles from "./Members.module.css"
-
 import { Button } from "@/Components/Buttons/Button"
 
 import { cookies } from "next/headers"
@@ -29,7 +28,6 @@ type MembersTypes = {
 		slug?: string
 	}[]
 }
-
 
 export default async function Members() {
     const { members }: MembersTypes = await getMembers()
