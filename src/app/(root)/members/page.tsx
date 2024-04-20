@@ -11,7 +11,6 @@ const getMembers = async () => {
 	const members = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getAllMemberss/`, {
 		cache: "no-store",
 	}).then((res) => res.json())
-
 	return { members: members.reverse() }
 }
 
@@ -30,7 +29,7 @@ type MembersTypes = {
 }
 
 export default async function Members() {
-    const { members }: MembersTypes = await getMembers()
+    /*const { members }: MembersTypes = await getMembers()
 	return (
 		<div className={styles.container}>
 			<h1>Conheça Nossos Membros!</h1>
@@ -43,5 +42,5 @@ export default async function Members() {
 			    })}
             </div>
 		</div>
-	)
+	)*/
 }
