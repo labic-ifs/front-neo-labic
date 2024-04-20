@@ -40,9 +40,7 @@ export default async function Members() {
                 {members.map((item) => {
 				    return <div className={styles.member}>
                         <p> {(item)} </p>
-						<Button.Root fullWidth>	
-					    	<Button.Text text="Quero Conhecer!"/>
-				    	</Button.Root>
+						<Button.Root fullWidth><Button.Text text="Quero Conhecer!"/></Button.Root>
                     </div>
 			    })}
             </div>
