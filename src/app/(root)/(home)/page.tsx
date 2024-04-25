@@ -20,6 +20,8 @@ const getArticles = async () => {
     `${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getAllArticles/`,
     { cache: "no-store" },
   ).then((res) => res.json());
+
+  return { articles: articles.reverse() };
 };
 
 export default async function Home() {
