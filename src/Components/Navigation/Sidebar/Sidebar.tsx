@@ -5,11 +5,13 @@ import Image from "next/image"
 import SidebarLinks from "./SidebarLinks/SidebarLinks"
 
 import { Squash as Hamburger } from "hamburger-react"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useRouter } from "next/navigation"
+import { AuthContext } from "@/contexts/AuthContext"
 
 export default function Sidebar() {
 	const [navState, setNavState] = useState(false)
+	const { userData } = useContext(AuthContext)
 
 	const router = useRouter()
 
@@ -37,7 +39,10 @@ export default function Sidebar() {
 					</h5>
 				</section>
 				<section className={styles.myAccountSection}>
-					<SidebarLinks navState={navState} />
+					<SidebarLinks
+						navState={navState}
+						isSuperuser={!!userData?.is_superuser}
+					/>
 				</section>
 			</nav>
 			<div className={styles.mobileNavDummy}></div>
@@ -63,7 +68,7 @@ export default function Sidebar() {
 					></Hamburger>
 				</section>
 				<section className={styles.bottom}>
-					<SidebarLinks navState />
+					<SidebarLinks navState isSuperuser={!!userData?.is_superuser} />
 				</section>
 			</nav>
 		</>

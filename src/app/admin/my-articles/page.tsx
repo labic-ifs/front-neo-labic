@@ -3,7 +3,7 @@ import styles from "./MyArticles.module.css"
 import AdminPostWidget from "@/Components/Posts/PostWidgets/AdminPostWidget"
 
 import { Input } from "@/Components/Forms/Input"
-import CreatePostButton from "@/Components/Posts/shortcuts/CreatePostButton/CreatePostButton"
+import CreatePostButton from "@/Components/shortcuts/CreatePostButton/CreatePostButton"
 
 import { cookies } from "next/headers"
 

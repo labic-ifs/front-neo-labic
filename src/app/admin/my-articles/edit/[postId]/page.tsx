@@ -1,16 +1,19 @@
 import styles from "./EditArticle.module.css"
 
 import EditPostWidget from "@/Components/Posts/EditPostWidget/EditPostWidget"
-import GoBackButton from "@/Components/Posts/shortcuts/GoBackButton/GoBackButton"
+import GoBackButton from "@/Components/shortcuts/GoBackButton/GoBackButton"
 
 export const metadata = {
 	title: "Editar Artigo",
 }
 
 const getPost = async (postId: string) => {
-	const post = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getPost/${postId}`, {
-		cache: "no-store",
-	}).then((res) => res.json())
+	const post = await fetch(
+		`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/getPost/${postId}`,
+		{
+			cache: "no-store",
+		}
+	).then((res) => res.json())
 
 	return post.post
 }

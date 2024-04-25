@@ -1,7 +1,7 @@
 import styles from "./EditMyProfile.module.css"
 
 import EditMyProfileForm from "./Form"
-import GoBackButton from "@/Components/Posts/shortcuts/GoBackButton/GoBackButton"
+import GoBackButton from "@/Components/shortcuts/GoBackButton/GoBackButton"
 
 export const metadata = {
 	title: "Editar Perfil",

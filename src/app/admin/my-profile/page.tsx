@@ -5,7 +5,7 @@ import MyProfileWidget from "./MyProfileWidget"
 import AdminPostWidget from "@/Components/Posts/PostWidgets/AdminPostWidget"
 import Link from "next/link"
 import Image from "next/image"
-import CreatePostButton from "@/Components/Posts/shortcuts/CreatePostButton/CreatePostButton"
+import CreatePostButton from "@/Components/shortcuts/CreatePostButton/CreatePostButton"
 import { Button } from "@/Components/Buttons/Button"
 
 export const metadata = {
@@ -80,7 +80,10 @@ export default async function MyProfile() {
 									)
 								})}
 							</div>
-							<Link className={styles.seeAllArticles} href={"/admin/my-articles"}>
+							<Link
+								className={styles.seeAllArticles}
+								href={"/admin/my-articles"}
+							>
 								<Button.Root fullWidth>
 									<Button.Text text="Ver Todos" />
 								</Button.Root>

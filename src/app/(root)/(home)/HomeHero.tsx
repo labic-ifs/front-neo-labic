@@ -206,8 +206,8 @@ export default function HomeHero() {
 						</div>
 						<h1>Bem-Vindo ao Labic</h1>
 						<p>
-							O Laboratório que une criatividade e inovação para desenvolver soluções
-							e tecnologia.
+							O Laboratório que une criatividade e inovação para desenvolver
+							soluções e tecnologia.
 						</p>
 					</span>
 					<Button.Root>
@@ -218,10 +218,9 @@ export default function HomeHero() {
 			<div className={styles.heroRight}>
 				{sliderImages.map((item) => {
 					return (
-						<>
+						<div key={item.id}>
 							{item.id === 0 ? (
 								<Image
-									key={item.id}
 									className={`${styles.heroRightSlideImage} ${styles.show}`}
 									src={item.path}
 									width={800}
@@ -230,7 +229,6 @@ export default function HomeHero() {
 								></Image>
 							) : (
 								<Image
-									key={item.id}
 									className={`${styles.heroRightSlideImage} ${styles.hide}`}
 									src={item.path}
 									width={800}
@@ -238,7 +236,7 @@ export default function HomeHero() {
 									alt={`slider image ${item.id}`}
 								></Image>
 							)}
-						</>
+						</div>
 					)
 				})}
 			</div>
