@@ -21,12 +21,12 @@ export default function SidebarLinks({ navState, isSuperuser }: SidebarLinksProp
 	const userLinks = [
 		{
 			name: "Meu Perfil",
-			path: "/admin/my-profile",
+			path: "/admin/profile",
 			icon: FaRegUser,
 		},
 		{
 			name: "Meus Artigos",
-			path: "/admin/my-articles",
+			path: "/admin/articles",
 			icon: MdOutlineArticle,
 		},
 	]

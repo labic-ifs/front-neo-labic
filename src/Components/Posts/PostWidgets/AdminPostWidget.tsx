@@ -20,7 +20,9 @@ type PostWidgetProps = {
 
 export default function AdminPostWidget({ markdownItem, isReduced }: PostWidgetProps) {
 	const { metadata } = metadataParser(markdownItem.body)
-	const postDate = moment(markdownItem.created_at).locale("pt-br").format("DD [de] MMMM, YYYY")
+	const postDate = moment(markdownItem.created_at)
+		.locale("pt-br")
+		.format("DD [de] MMMM, YYYY")
 
 	const router = useRouter()
 
@@ -50,8 +52,10 @@ export default function AdminPostWidget({ markdownItem, isReduced }: PostWidgetP
 							isReduced ? (
 								<h1 className={styles.title}>
 									{metadata?.title.slice(0, 24)}
-									{[...metadata?.title].reduce((a: number) => a + 1, 0) > 24 &&
-										"..."}
+									{[...metadata?.title].reduce(
+										(a: number) => a + 1,
+										0
+									) > 24 && "..."}
 								</h1>
 							) : (
 								<h1 className={styles.title}>{metadata?.title}</h1>
@@ -62,7 +66,7 @@ export default function AdminPostWidget({ markdownItem, isReduced }: PostWidgetP
 						<Button.Root
 							id={`topEditBtn`}
 							onClick={() => {
-								router.push(`/admin/my-articles/edit/${markdownItem.id}`)
+								router.push(`management/articles/edit/${markdownItem.id}`)
 							}}
 						>
 							<Button.Text text="Editar" />
@@ -72,14 +76,18 @@ export default function AdminPostWidget({ markdownItem, isReduced }: PostWidgetP
 						isReduced ? (
 							<p className={styles.description}>
 								{metadata?.description.slice(0, 125)}
-								{[...metadata?.description].reduce((a: number) => a + 1, 0) > 125 &&
-									"..."}
+								{[...metadata?.description].reduce(
+									(a: number) => a + 1,
+									0
+								) > 125 && "..."}
 							</p>
 						) : (
 							<p className={styles.description}>
 								{metadata?.description.slice(0, 450)}
-								{[...metadata?.description].reduce((a: number) => a + 1, 0) > 450 &&
-									"..."}
+								{[...metadata?.description].reduce(
+									(a: number) => a + 1,
+									0
+								) > 450 && "..."}
 							</p>
 						)
 					) : (
@@ -90,7 +98,7 @@ export default function AdminPostWidget({ markdownItem, isReduced }: PostWidgetP
 				<Button.Root
 					id={`bottomEditBtn`}
 					onClick={() => {
-						router.push(`/admin/my-articles/edit/${markdownItem.id}`)
+						router.push(`management/articles/edit/${markdownItem.id}`)
 					}}
 				>
 					<Button.Text text="Editar" />

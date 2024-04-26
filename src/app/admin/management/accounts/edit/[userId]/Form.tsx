@@ -134,11 +134,11 @@ export default function EditMyProfileForm() {
 
 			if (payload.ok) {
 				revalidatePaths("/")
-				revalidatePaths("/admin/my-profile")
+				revalidatePaths("/admin/profile")
 
 				recoverUserData(true)
 
-				router.push("/admin/my-profile")
+				router.push("/admin/profile")
 			}
 		} catch (err: any) {
 			return err.errors

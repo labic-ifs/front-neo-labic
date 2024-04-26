@@ -16,13 +16,13 @@
 	flex-grow: 1;
 	max-width: 50%;
 	gap: 1rem;
-	background: var(--primary-gradient);
+	/* background: var(--primary-gradient); */
 	border-radius: 1rem;
 	padding: 1.25rem 1.75rem;
 	position: relative;
 }
 
-.sectionContainer::before {
+/* .sectionContainer::before {
 	content: "";
 	position: absolute;
 	inset: 0;
@@ -33,7 +33,7 @@
 	-webkit-mask-composite: xor;
 	mask-composite: exclude;
 	z-index: -1;
-}
+} */
 
 .articlesSectionContainer {
 	display: flex;

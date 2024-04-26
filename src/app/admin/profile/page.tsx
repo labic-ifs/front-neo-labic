@@ -82,7 +82,7 @@ export default async function MyProfile() {
 							</div>
 							<Link
 								className={styles.seeAllArticles}
-								href={"/admin/my-articles"}
+								href={"/admin/articles"}
 							>
 								<Button.Root fullWidth>
 									<Button.Text text="Ver Todos" />

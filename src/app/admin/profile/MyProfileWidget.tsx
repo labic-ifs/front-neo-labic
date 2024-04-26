@@ -59,7 +59,7 @@ export default function MyProfileWidget() {
 						<h1 className={styles.title}>Dados</h1>
 						<Button.Root
 							onClick={() => {
-								router.push(`/admin/my-profile/edit/${userData?.id}`)
+								router.push(`management/accounts/edit/${userData?.id}`)
 							}}
 						>
 							<Button.Text text="Editar" />

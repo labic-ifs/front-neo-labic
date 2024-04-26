@@ -22,17 +22,20 @@ export default function CreatePostButton({ fullWidth }: CreatePostButtonTypes) {
 		form.append("body", "---\ntitle: \ndescription: \ncover: \n---\n")
 		form.append("slug", "untitled")
 
-		const { postId } = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/createPost/`, {
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-			body: form,
-		}).then((res) => res.json())
+		const { postId } = await fetch(
+			`${process.env.NEXT_PUBLIC_BACKEND_HOST}posts/createPost/`,
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				body: form,
+			}
+		).then((res) => res.json())
 
 		console.log(postId)
 
-		router.push(`/admin/my-articles/edit/${postId}`)
+		router.push(`management/articles/edit/${postId}`)
 	}
 	return (
 		<>

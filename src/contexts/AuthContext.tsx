@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 			setUserData(user)
 
-			router.push("/admin/my-profile")
+			router.push("/admin/profile")
 
 			return success
 		} else {

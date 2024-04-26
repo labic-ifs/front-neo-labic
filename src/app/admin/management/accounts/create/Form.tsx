@@ -36,11 +36,17 @@ const formSchema = object({
 })
 
 export default function CreateAccountForm() {
+	// Remove user if not superuser
 	const { userData } = useContext(AuthContext)
-	const [formData, setFormData] = useState<formDataTypes>({})
-	const [state, formAction] = useFormState(handleSubmit, undefined)
 
 	const router = useRouter()
+
+	if (!userData?.is_superuser) {
+		router.push("/admin/profile")
+	}
+
+	const [formData, setFormData] = useState<formDataTypes>({})
+	const [state, formAction] = useFormState(handleSubmit, undefined)
 
 	const getValue = (event: ChangeEvent<HTMLInputElement>) => {
 		setFormData((prevData) => ({

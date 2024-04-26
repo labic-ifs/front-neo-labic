@@ -55,7 +55,9 @@ export default function Navbar() {
 				!event.target.matches("#dropdown-button") &&
 				!event.target.matches("#user-profile-image")
 			) {
-				let dropdownContent = document.getElementsByClassName(`${styles.dropdownContent}`)
+				let dropdownContent = document.getElementsByClassName(
+					`${styles.dropdownContent}`
+				)
 
 				for (let i = 0; i < dropdownContent?.length; i++) {
 					let openDropdown = dropdownContent[i]
@@ -166,7 +168,7 @@ export default function Navbar() {
 							{userData?.id ? (
 								<div>
 									<Link
-										href="/admin/my-profile"
+										href="/admin/profile"
 										className={styles.dropdownItemContainer}
 									>
 										<IconContext.Provider
@@ -196,7 +198,10 @@ export default function Navbar() {
 									</button>
 								</div>
 							) : (
-								<Link href="/sign-in" className={styles.dropdownItemContainer}>
+								<Link
+									href="/sign-in"
+									className={styles.dropdownItemContainer}
+								>
 									<IconContext.Provider
 										value={{
 											color: "#fff",
