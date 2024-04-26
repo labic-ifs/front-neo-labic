@@ -4,6 +4,10 @@ import { cookies } from "next/headers"
 import UserTable from "@/Components/Users/UserTable/UsersTable"
 import Link from "next/link"
 
+export const metadata = {
+	title: "Contas",
+}
+
 const getUsersData = async () => {
 	const token = cookies().get("labicToken")
 

@@ -3,6 +3,10 @@ import styles from "./CreateAccount.module.css"
 import CreateAccountForm from "./Form"
 import GoBackButton from "@/Components/shortcuts/GoBackButton/GoBackButton"
 
+export const metadata = {
+	title: "Criar Conta",
+}
+
 export default async function CreateAccount() {
 	return (
 		<main className={styles.container}>

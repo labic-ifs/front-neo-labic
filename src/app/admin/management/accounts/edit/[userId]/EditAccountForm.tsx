@@ -1,7 +1,7 @@
 "use client"
 
 import { ChangeEvent, useContext, useEffect, useState } from "react"
-import styles from "./Form.module.css"
+import styles from "./EditAccountForm.module.css"
 import { AuthContext } from "@/contexts/AuthContext"
 import { useFormState } from "react-dom"
 import { object } from "yup"
@@ -17,14 +17,30 @@ import { revalidatePaths } from "@/lib/actions"
 import { useRouter } from "next/navigation"
 
 type formDataTypes = {
-	email?: string
+	email?: string | null
 	firstName?: string
 	lastName?: string
 	username?: string
-	course?: string
-	occupationArea?: string
-	description?: string
+	course?: string | null
+	occupationArea?: string | null
+	description?: string | null
 	profileImage?: File | null
+}
+
+type userDataTypes = {
+	userData: {
+		id: string
+		profile_image?: string
+		email?: string
+		first_name: string
+		last_name: string
+		username: string
+		course?: string
+		occupation_area?: string
+		description?: string
+		is_active: boolean
+		is_superuser: boolean
+	}
 }
 
 const imageSchema = object().shape({
@@ -62,8 +78,9 @@ const formSchema = object({
 	description: yup.string(),
 })
 
-export default function EditMyProfileForm() {
-	const { userData, recoverUserData } = useContext(AuthContext)
+export default function EditAccountForm({ userData }: userDataTypes) {
+	const { userData: user } = useContext(AuthContext)
+	const { recoverUserData } = useContext(AuthContext)
 	const [formData, setFormData] = useState<formDataTypes>({})
 	const [fileName, setFileName] = useState<string>()
 	const [state, formAction] = useFormState(handleSubmit, undefined)
@@ -72,15 +89,15 @@ export default function EditMyProfileForm() {
 
 	useEffect(() => {
 		setFormData({
-			email: userData?.email || "",
-			firstName: userData?.first_name || "",
-			lastName: userData?.last_name || "",
-			username: userData?.username || "",
-			course: userData?.course || "",
-			occupationArea: userData?.occupation_area || "",
-			description: userData?.description || "",
+			email: userData.email || "",
+			firstName: userData.first_name,
+			lastName: userData.last_name,
+			username: userData.username,
+			course: userData.course || null,
+			occupationArea: userData.occupation_area || null,
+			description: userData.description || null,
 		})
-	}, [userData])
+	}, [])
 
 	const getValue = (event: ChangeEvent<HTMLInputElement>) => {
 		setFormData((prevData) => ({
@@ -120,7 +137,7 @@ export default function EditMyProfileForm() {
 			const { labicToken: token } = parseCookies()
 
 			const payload = await fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/updateUserData/${userData?.id}/`,
+				`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/updateUserData/${userData.id}/`,
 				{
 					method: "PUT",
 					headers: {
@@ -138,7 +155,7 @@ export default function EditMyProfileForm() {
 
 				recoverUserData(true)
 
-				router.push("/admin/profile")
+				router.back()
 			}
 		} catch (err: any) {
 			return err.errors
@@ -328,6 +345,15 @@ export default function EditMyProfileForm() {
 						</Input.Root>
 					</div>
 					<div className={styles.buttonWrapper}>
+						<Button.Root
+							type="button"
+							onClick={() => {
+								router.push(`password/${userData.id}`)
+							}}
+							fullWidth
+						>
+							<Button.Text text="Alterar Senha" />
+						</Button.Root>
 						<Button.Root fullWidth>
 							<Button.Text text="Salvar" />
 						</Button.Root>

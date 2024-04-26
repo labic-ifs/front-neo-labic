@@ -1,11 +1,11 @@
-import styles from "./EditAccount.module.css"
+import styles from "./EditPassword.module.css"
 
-import EditAccountForm from "./EditAccountForm"
 import GoBackButton from "@/Components/shortcuts/GoBackButton/GoBackButton"
+import EditPasswordForm from "./EditPasswordForm"
 import { cookies } from "next/headers"
 
 export const metadata = {
-	title: "Editar Conta",
+	title: "Alterar Senha",
 }
 
 const getUser = async (userId: string) => {
@@ -24,7 +24,7 @@ const getUser = async (userId: string) => {
 	return user
 }
 
-export default async function EditAccount({ params }: any) {
+export default async function EditPassword({ params }: any) {
 	const userId = params.userId
 	const userData = await getUser(userId)
 
@@ -34,7 +34,10 @@ export default async function EditAccount({ params }: any) {
 				<div className={styles.previousPageSection}>
 					<GoBackButton />
 				</div>
-				<EditAccountForm userData={userData} />
+				<div className={styles.header}>
+					<h1>Alterar Senha</h1>
+				</div>
+				<EditPasswordForm userData={userData} />
 			</div>
 		</main>
 	)

@@ -8,7 +8,9 @@ import { IconContext } from "react-icons"
 import { FaRegCheckCircle } from "react-icons/fa"
 import { RxCrossCircled } from "react-icons/rx"
 import { AuthContext } from "@/contexts/AuthContext"
-import { useRouter } from "next/navigation"
+import { Button } from "@/Components/Buttons/Button"
+import Link from "next/link"
+import { FaRegEdit } from "react-icons/fa"
 
 type UserTableTyper = {
 	users: {
@@ -38,6 +40,7 @@ export default function UserTable({ users }: UserTableTyper) {
 						<td className={styles.tableData}>E-mail</td>
 						<td className={styles.tableData}>Curso</td>
 						<td className={styles.tableData}>Status</td>
+						<td className={styles.tableData}>Editar</td>
 					</tr>
 				</thead>
 				<tbody className={styles.tableBody}>
@@ -67,6 +70,15 @@ export default function UserTable({ users }: UserTableTyper) {
 												<RxCrossCircled></RxCrossCircled>
 											</IconContext.Provider>
 										)}
+									</td>
+									<td className={styles.tableData}>
+										<Link href={`accounts/edit/${user.id}`}>
+											<IconContext.Provider
+												value={{ color: "#fff", size: "20px" }}
+											>
+												<FaRegEdit></FaRegEdit>
+											</IconContext.Provider>
+										</Link>
 									</td>
 								</tr>
 							)

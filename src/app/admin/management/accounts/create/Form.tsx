@@ -64,8 +64,6 @@ export default function CreateAccountForm() {
 			}
 
 			if (formData.password !== formData.passwordConfirmation) {
-				console.log(formData.password)
-				console.log(formData.passwordConfirmation)
 				return "As senhas devem ser iguais!"
 			}
 
