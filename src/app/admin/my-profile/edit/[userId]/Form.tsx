@@ -63,10 +63,9 @@ const formSchema = object({
 })
 
 export default function EditMyProfileForm() {
-	const { signIn, userData } = useContext(AuthContext)
+	const { userData, recoverUserData } = useContext(AuthContext)
 	const [formData, setFormData] = useState<formDataTypes>({})
 	const [fileName, setFileName] = useState<string>()
-	const [currentPassword, setCurrentPassword] = useState<string>()
 	const [state, formAction] = useFormState(handleSubmit, undefined)
 
 	const router = useRouter()
@@ -84,11 +83,10 @@ export default function EditMyProfileForm() {
 	}, [userData])
 
 	const getValue = (event: ChangeEvent<HTMLInputElement>) => {
-		setFormData((prevData) => ({ ...prevData, [event.target.name]: event.target.value }))
-	}
-
-	const getCurrentPasswordValue = (event: ChangeEvent<HTMLInputElement>) => {
-		setCurrentPassword(event.target.value)
+		setFormData((prevData) => ({
+			...prevData,
+			[event.target.name]: event.target.value,
+		}))
 	}
 
 	const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
@@ -119,39 +117,28 @@ export default function EditMyProfileForm() {
 			finalForm.append("description", formData?.description!)
 			finalForm.append("profileImage", formData?.profileImage!)
 
-			const trySignIn = await signIn({
-				key: formData.username,
-				password: currentPassword,
+			const { labicToken: token } = parseCookies()
+
+			const payload = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/updateUserData/${userData?.id}/`,
+				{
+					method: "PUT",
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+					body: finalForm,
+				}
+			).then((res) => {
+				return res
 			})
 
-			if (trySignIn == "Authorized") {
-				const { labicToken: token } = parseCookies()
+			if (payload.ok) {
+				revalidatePaths("/")
+				revalidatePaths("/admin/my-profile")
 
-				const payload = await fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_HOST}users/updateUserData/${userData?.id}/`,
-					{
-						method: "PUT",
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-						body: finalForm,
-					}
-				).then((res) => {
-					return res
-				})
+				recoverUserData(true)
 
-				if (payload.ok) {
-					revalidatePaths("/")
-
-					const revalidateTrySignIn = await signIn({
-						key: formData.username,
-						password: currentPassword,
-					})
-
-					router.push("/admin/my-profile")
-				}
-			} else {
-				return "Wrong password."
+				router.push("/admin/my-profile")
 			}
 		} catch (err: any) {
 			return err.errors
@@ -164,7 +151,10 @@ export default function EditMyProfileForm() {
 				<h1>Atualize sua conta!</h1>
 				<form className={styles.formTag} action={formAction} noValidate>
 					<div className={styles.inputContainer}>
-						<label htmlFor="profileImageInput" className={styles.fileInputLabel}>
+						<label
+							htmlFor="profileImageInput"
+							className={styles.fileInputLabel}
+						>
 							<div className={styles.innerFileInput}>
 								<Error text="Alterações de foto podem levar um tempo para surtir efeito, pois necessitam de tempo para serem processadas."></Error>
 								<IconContext.Provider
@@ -225,7 +215,10 @@ export default function EditMyProfileForm() {
 								/>
 							</Input.Root>
 							{state?.includes("O nome de usuário é obrigatório.") && (
-								<Error text="O nome de usuário é obrigatório." fieldError />
+								<Error
+									text="O nome de usuário é obrigatório."
+									fieldError
+								/>
 							)}
 							{state?.includes(
 								"Nome de usuário não deve conter espaços em branco."
@@ -312,7 +305,11 @@ export default function EditMyProfileForm() {
 									name="occupationArea"
 									type="text"
 									placeholder="Web Design, Web Development, IoT"
-									value={formData.occupationArea ? formData.occupationArea : ""}
+									value={
+										formData.occupationArea
+											? formData.occupationArea
+											: ""
+									}
 									getValue={getValue}
 								/>
 							</Input.Root>
@@ -330,26 +327,6 @@ export default function EditMyProfileForm() {
 							/>
 						</Input.Root>
 					</div>
-					<hr className={styles.divider} />
-					<div className={styles.inputContainer}>
-						<p className={styles.inputLabel}>Senha Atual</p>
-						<Input.Root>
-							<Input.Tag
-								name="currentPassword"
-								type="password"
-								placeholder="SenhaForte123!!#"
-								getValue={getCurrentPasswordValue}
-							/>
-						</Input.Root>
-					</div>
-					{state?.includes("Something went wrong.") ||
-						(state?.includes("Wrong password.") && (
-							<div className={styles.finalErrorMargin}>
-								{state?.includes("Wrong password.") && (
-									<Error text="Senha incorreta." />
-								)}
-							</div>
-						))}
 					<div className={styles.buttonWrapper}>
 						<Button.Root fullWidth>
 							<Button.Text text="Salvar" />

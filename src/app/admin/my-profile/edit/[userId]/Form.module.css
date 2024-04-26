@@ -22,6 +22,7 @@
 .fileInputLabel {
 	width: 100%;
 	border: 1px solid var(--primary-color);
+	background-color: var(--accent-bg);
 	padding: 1rem 0.75rem;
 	border-radius: 8px;
 	cursor: pointer;

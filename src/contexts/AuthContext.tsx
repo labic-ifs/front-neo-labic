@@ -27,6 +27,7 @@ type AuthContext = {
 	isAuthenticated: boolean
 	userData: UserType | null
 	signIn: ({ key, password }: SignInData) => Promise<string>
+	recoverUserData: (forced?: boolean) => Promise<void>
 }
 
 export const AuthContext = createContext({} as AuthContext)
@@ -38,26 +39,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 	const isAuthenticated = !!userData
 
+	async function recoverUserData(forced?: boolean) {
+		const { labicToken: token } = parseCookies()
+
+		if ((token && !userData) || forced) {
+			const user = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/recoverUser/`,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			).then((res) => res.json())
+
+			setUserData(user)
+		}
+	}
+
 	useEffect(() => {
 		recoverUserData()
-
-		async function recoverUserData() {
-			const { labicToken: token } = parseCookies()
-
-			if (token && !userData) {
-				const user = await fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_HOST}auth/recoverUser/`,
-					{
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: `Bearer ${token}`,
-						},
-					}
-				).then((res) => res.json())
-
-				setUserData(user)
-			}
-		}
 	})
 
 	async function signIn({ key, password }: SignInData) {
@@ -90,7 +91,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	}
 
 	return (
-		<AuthContext.Provider value={{ isAuthenticated, signIn, userData }}>
+		<AuthContext.Provider
+			value={{ isAuthenticated, signIn, userData, recoverUserData }}
+		>
 			{children}
 		</AuthContext.Provider>
 	)

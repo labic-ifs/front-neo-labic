@@ -22,3 +22,10 @@
 .finalErrorMargin {
 	margin: 1.5rem 0 0 0;
 }
+
+@media (max-width: 640px) {
+	.doubleInput {
+		flex-direction: column;
+		gap: 0;
+	}
+}
