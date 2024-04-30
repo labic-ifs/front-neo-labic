@@ -1,0 +1,76 @@
+.outerContainer {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.container {
+	width: 100%;
+	margin: 3rem 2rem 2rem 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	max-width: 1536px;
+	gap: 16px;
+}
+
+.header {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.members {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 32px;
+}
+
+.members .member {
+	width: 330px;
+	padding: 16px;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+.members .member::before {
+	content: "";
+	position: absolute;
+	height: 67.5%;
+	border-radius: 12px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: var(--primary-gradient);
+	z-index: -1;
+}
+
+.membersInfoContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.profileImage {
+	align-self: center;
+	border-radius: 100%;
+}
+
+.profileName,
+.profileInfo {
+	padding: 8px 0 12px 0;
+}
+
+@media (max-width: 768px) {
+	.members {
+		flex-direction: column;
+	}
+
+	.members .member {
+		width: 100%;
+	}
+}
