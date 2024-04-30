@@ -40,7 +40,7 @@ export default async function Members() {
 				<div className={styles.members}>
 					{members.map((item) => {
 						return (
-							<div className={styles.member}>
+							<div key={item.id} className={styles.member}>
 								<div className={styles.membersInfoContainer}>
 									{item.profile_image ? (
 										<Image
