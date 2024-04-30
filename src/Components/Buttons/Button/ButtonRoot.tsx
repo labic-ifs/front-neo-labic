@@ -8,6 +8,7 @@ type NotificationRootProps = {
 	extraClassName?: string
 	id?: string
 	onClick?: () => void
+	type?: "submit" | "reset" | "button" | undefined
 }
 
 export default function ButtonRoot({
@@ -16,6 +17,7 @@ export default function ButtonRoot({
 	onClick,
 	id,
 	extraClassName,
+	type,
 }: NotificationRootProps) {
 	return (
 		<button
@@ -24,6 +26,7 @@ export default function ButtonRoot({
 				styles.container
 			} ${extraClassName && extraClassName}`}
 			onClick={onClick}
+			type={type}
 		>
 			{children}
 		</button>

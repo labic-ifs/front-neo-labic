@@ -37,7 +37,8 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 	const [state, formAction] = useFormState(updatePost, undefined)
 
 	useEffect(() => {
-		const textAreaElement: HTMLTextAreaElement | null = document.querySelector("#textarea")
+		const textAreaElement: HTMLTextAreaElement | null =
+			document.querySelector("#textarea")
 		const previewElement: HTMLDivElement | null = document.querySelector("#preview")
 		if (textAreaElement && previewElement) {
 			const previewSize = previewElement.offsetHeight
@@ -74,13 +75,15 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 						body: JSON.stringify({
 							isPublished: formData.isPublished,
 							body: textBody,
-							slug: metadata.title ? metadata.title.replace(/ /g, "-") : "untitled",
+							slug: metadata.title
+								? metadata.title.replace(/ /g, "-")
+								: "untitled",
 						}),
 					}
 				)
 
 				if (payload.ok) {
-					revalidatePaths("/admin/my-articles")
+					revalidatePaths("/admin/articles")
 					revalidatePaths("/articles")
 					router.back()
 				} else {
@@ -109,7 +112,9 @@ export default function EditPostWidget({ markdownBody }: EditPostWidgetProps) {
 				{state?.error === "It was not possible to save your post." && (
 					<Error text="Não foi possível salvar seu post." />
 				)}
-				{state?.error === "Something went wrong." && <Error text="Algo deu errado." />}
+				{state?.error === "Something went wrong." && (
+					<Error text="Algo deu errado." />
+				)}
 				<div className={styles.postOptionsContainer}>
 					<div className={styles.postOption}>
 						<p>Publicado</p>

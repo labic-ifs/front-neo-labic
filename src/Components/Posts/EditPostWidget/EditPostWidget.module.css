@@ -114,6 +114,7 @@
 
 	.previewWrapper {
 		height: 960px;
+		margin-bottom: 32px;
 	}
 
 	.editPreviewArea {
